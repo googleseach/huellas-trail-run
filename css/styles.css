@@ -1362,13 +1362,25 @@ img { max-width: 100%; display: block; }
 
 /* =========================================
    CLUBES Y COMUNIDADES ALIADAS
+   ¡NUEVO DISEÑO PREMIUM!
    ========================================= */
 .clubes {
-    background-color: var(--tierra-profunda);
-    padding: 80px 20px;
+    background: linear-gradient(180deg, var(--tierra-profunda) 0%, #3A2619 100%);
+    padding: 100px 20px;
     text-align: center;
     position: relative;
     overflow: hidden;
+}
+
+.clubes::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(182, 138, 69, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(182, 138, 69, 0.15) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .clubes .container { position: relative; z-index: 1; }
@@ -1382,64 +1394,122 @@ img { max-width: 100%; display: block; }
     font-weight: 600;
 }
 
+.clubes .section-title {
+    color: var(--marfil-sendero);
+}
+
+.clubes .section-subtitle {
+    color: var(--marfil-sendero);
+    opacity: 0.8;
+}
+
 .clubes-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     max-width: 700px;
-    margin: 0 auto 40px;
+    margin: 0 auto 50px;
 }
 
 .club-card {
-    background-color: rgba(244, 235, 221, 0.05);
-    border: 1px solid rgba(182, 138, 69, 0.3);
-    border-radius: 15px;
-    padding: 25px 15px;
-    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+    background: linear-gradient(180deg, rgba(244, 235, 221, 0.08) 0%, rgba(244, 235, 221, 0.03) 100%);
+    border: 1px solid rgba(182, 138, 69, 0.4);
+    border-radius: 20px;
+    padding: 30px 20px 25px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Línea decorativa superior al hover */
+.club-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--oro-terrenal), transparent);
+    transition: width 0.4s ease;
+}
+
+.club-card:hover::before {
+    width: 80%;
 }
 
 .club-card:hover {
-    background-color: rgba(244, 235, 221, 0.1);
     border-color: var(--oro-terrenal);
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(182, 138, 69, 0.2);
+    background: linear-gradient(180deg, rgba(244, 235, 221, 0.12) 0%, rgba(244, 235, 221, 0.05) 100%);
 }
 
-/* LOGO CIRCULAR CON FONDO BLANCO Y BORDE DORADO */
+/* LOGO CIRCULAR CON BRILLO Y HALO DORADO */
 .club-logo {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    background-color: #FFFFFF;
-    border: 2px solid var(--oro-terrenal);
+    background: radial-gradient(circle at 30% 30%, #FFFFFF 0%, #F4EBDD 100%);
+    border: 3px solid var(--oro-terrenal);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 18px;
+    margin: 0 auto 20px;
     overflow: hidden;
-    padding: 10px;
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(182, 138, 69, 0.2);
+    padding: 12px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 0 0 6px rgba(182, 138, 69, 0.15),
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        inset 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Halo brillante detrás del logo */
+.club-logo::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(182, 138, 69, 0.4) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
 }
 
 .club-logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .club-card:hover .club-logo {
-    transform: scale(1.05);
+    transform: scale(1.08);
     border-color: var(--oro-terrenal);
-    box-shadow: 0 8px 25px rgba(182, 138, 69, 0.4);
+    box-shadow: 
+        0 0 0 8px rgba(182, 138, 69, 0.25),
+        0 12px 35px rgba(0, 0, 0, 0.5),
+        inset 0 2px 15px rgba(255, 255, 255, 0.6);
+}
+
+.club-card:hover .club-logo::after {
+    opacity: 1;
 }
 
 .club-card:hover .club-logo img {
-    transform: scale(1.08);
+    transform: scale(1.1);
 }
 
 .club-placeholder {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--tierra-profunda);
     letter-spacing: 2px;
     font-weight: 700;
@@ -1447,17 +1517,21 @@ img { max-width: 100%; display: block; }
 
 .club-card h3 {
     font-family: var(--font-titulos);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--marfil-sendero);
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .club-card p {
-    font-size: 0.75rem;
-    color: var(--marfil-sendero);
-    opacity: 0.7;
+    font-size: 0.8rem;
+    color: var(--oro-terrenal);
+    opacity: 0.9;
     font-style: italic;
+    letter-spacing: 1px;
+    font-weight: 500;
 }
 
 .btn-club {
@@ -1465,18 +1539,38 @@ img { max-width: 100%; display: block; }
     background-color: transparent;
     color: var(--oro-terrenal);
     text-decoration: none;
-    padding: 15px 35px;
+    padding: 16px 40px;
     border-radius: 5px;
     font-weight: 700;
     font-size: 0.9rem;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     border: 1px solid var(--oro-terrenal);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn-club:hover { background-color: var(--oro-terrenal); color: var(--tierra-profunda); }
+.btn-club::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(182, 138, 69, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-club:hover::before {
+    left: 100%;
+}
+
+.btn-club:hover { 
+    background-color: var(--oro-terrenal); 
+    color: var(--tierra-profunda);
+    box-shadow: 0 10px 30px rgba(182, 138, 69, 0.4);
+    transform: translateY(-2px);
+}
 
 /* =========================================
    PATROCINADORES
@@ -1663,9 +1757,23 @@ footer {
     .form-row { grid-template-columns: 1fr; }
     .cuenta-numero { font-size: 1.6rem; }
 
-    .clubes-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .club-logo { width: 85px; height: 85px; padding: 8px; }
-    .club-card h3 { font-size: 1rem; }
+    .clubes-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px; 
+        max-width: 100%;
+    }
+    .club-logo { width: 90px; height: 90px; padding: 8px; border-width: 2px; }
+    .club-card { padding: 22px 12px 18px; border-radius: 15px; }
+    .club-card h3 { font-size: 1.1rem; }
+    .club-card p { font-size: 0.7rem; }
+    .club-logo::after { inset: -6px; }
+    
+    .club-card:hover .club-logo {
+        box-shadow: 
+            0 0 0 6px rgba(182, 138, 69, 0.25),
+            0 8px 25px rgba(0, 0, 0, 0.5),
+            inset 0 2px 10px rgba(255, 255, 255, 0.6);
+    }
 
     footer { padding: 40px 20px 100px; }
 }
@@ -1675,7 +1783,7 @@ footer {
     .pillars-grid { grid-template-columns: repeat(5, 1fr); max-width: 900px; }
     .cards-container { flex-direction: row; max-width: 900px; justify-content: center; gap: 30px; }
     .card { flex: 1; max-width: 420px; }
-    .clubes-grid { grid-template-columns: repeat(4, 1fr); max-width: 1000px; }
+    .clubes-grid { grid-template-columns: repeat(4, 1fr); max-width: 1200px; }
     .sponsors-grid { grid-template-columns: repeat(3, 1fr); max-width: 800px; }
     .ruta-detalles { grid-template-columns: repeat(4, 1fr); }
     .pricing-footer { flex-direction: row; justify-content: center; gap: 40px; }
