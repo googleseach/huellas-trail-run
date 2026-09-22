@@ -2,6 +2,15 @@
    HUELLAS HACIENDA TRAIL RUN - SCRIPT
    ========================================= */
 
+// ⚡ NUEVO: Calcular altura real del viewport para móviles (evita el "temblor" en iOS)
+function setVH() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+setVH();
+window.addEventListener('resize', setVH);
+window.addEventListener('orientationchange', setVH);
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🌿 Sistema HUELLAS iniciado correctamente.');
 
@@ -9,13 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbx84D_EGPmmvoWuVzutUiUQZYlXAD9nMNsfxFJFP-6ldtgavgDzkgJfNaQBM73ivWW0LQ/exec';
 
     // =========================================
-    // LISTA DE CLUBES Y COMUNIDADES ALIADAS
-    // Los clubes ya están en el HTML, pero aquí
-    // puedes agregar más dinámicamente si quieres
+    // LISTA DE CLUBES EXTRA (opcional)
     // =========================================
     const CLUBES_EXTRA = [
         // "Nombre de otro club",
-        // "Otra comunidad",
     ];
 
     const selectClub = document.getElementById('club');
@@ -161,23 +167,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // 4. ANIMACIÓN DE APARICIÓN
+    // 4. ANIMACIÓN DE APARICIÓN (SOLO EN DESKTOP)
+    // ⚡ NUEVO: Deshabilitada en móvil para evitar el "temblor"
     // =========================================
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1 });
+    const esMovil = window.matchMedia('(max-width: 767px)').matches;
+    
+    if (!esMovil) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
 
-    document.querySelectorAll('.pillar, .card, .detalle-item, .sponsor-box, .club-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+        document.querySelectorAll('.pillar, .card, .detalle-item, .sponsor-box, .club-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    }
 
     // =========================================
     // 5. BOTONES DE INSCRIPCIÓN DE LAS TARJETAS
@@ -234,12 +245,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log('📋 Datos capturados:', datosInscripcion);
 
-            // Mostrar estado de carga
             const textoOriginal = btnSubmit.innerHTML;
             btnSubmit.innerHTML = '<span>GUARDANDO...</span>';
             btnSubmit.disabled = true;
 
-            // Enviar a Google Sheets
             try {
                 await fetch(URL_GOOGLE_SCRIPT, {
                     method: 'POST',
@@ -252,11 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('⚠️ Error al enviar a Sheets:', error);
             }
 
-            // Restaurar botón
             btnSubmit.innerHTML = textoOriginal;
             btnSubmit.disabled = false;
 
-            // Generar resumen del pago
             const precio = datosInscripcion.distancia === '10K' ? 'RD$ 1,800' : 'RD$ 1,600';
             
             pagoResumen.innerHTML = `
