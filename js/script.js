@@ -11,26 +11,21 @@ setVH();
 window.addEventListener('resize', setVH);
 window.addEventListener('orientationchange', setVH);
 
-// ⚡ Prevenir scroll rebote en iOS (evita que la pantalla se mueva sola)
+// ⚡ Prevenir scroll rebote en iOS
 document.addEventListener('touchmove', function(e) {
-    // Permitir scroll dentro de contenedores con scroll propio
     if (e.target.closest('.carrusel-viewport')) return;
-    // Permitir scroll normal
     return;
 }, { passive: true });
 
-// ⚡ Bloquear rebote cuando el scroll está en los extremos
 let lastScrollTop = 0;
 window.addEventListener('scroll', function() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight;
     const clientHeight = document.documentElement.clientHeight;
     
-    // Si estamos en el top y se intenta hacer scroll hacia arriba
     if (scrollTop <= 0) {
         window.scrollTo(0, 0);
     }
-    // Si estamos en el bottom y se intenta hacer scroll hacia abajo
     if (scrollTop + clientHeight >= scrollHeight) {
         window.scrollTo(0, scrollHeight - clientHeight);
     }
@@ -44,12 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const NUMERO_WHATSAPP = '18492205138';
     const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbx84D_EGPmmvoWuVzutUiUQZYlXAD9nMNsfxFJFP-6ldtgavgDzkgJfNaQBM73ivWW0LQ/exec';
 
-    // =========================================
-    // LISTA DE CLUBES EXTRA (opcional)
-    // =========================================
-    const CLUBES_EXTRA = [
-        // "Nombre de otro club",
-    ];
+    const CLUBES_EXTRA = [];
 
     const selectClub = document.getElementById('club');
     if (selectClub && CLUBES_EXTRA.length > 0) {

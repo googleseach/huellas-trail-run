@@ -17,14 +17,10 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* =========================================
-   FIX SCROLL REBOTE iOS
-   ========================================= */
 html { 
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
-    /* FIX: evitar rebote en iOS */
     overscroll-behavior-y: none;
     height: 100%;
 }
@@ -36,7 +32,6 @@ body {
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     line-height: 1.6;
-    /* FIX: evitar rebote en iOS */
     overscroll-behavior-y: none;
     -webkit-overflow-scrolling: touch;
     position: relative;
@@ -70,7 +65,6 @@ img { max-width: 100%; display: block; }
     background-attachment: scroll;
     padding: 40px 20px;
     overflow: hidden;
-    /* FIX: bloquear scroll dentro del hero */
     overscroll-behavior: contain;
 }
 
@@ -1374,7 +1368,6 @@ img { max-width: 100%; display: block; }
 
 /* =========================================
    CLUBES Y COMUNIDADES ALIADAS
-   ¡NUEVO DISEÑO PREMIUM!
    ========================================= */
 .clubes {
     background: linear-gradient(180deg, var(--tierra-profunda) 0%, #3A2619 100%);
@@ -1460,12 +1453,10 @@ img { max-width: 100%; display: block; }
     background: linear-gradient(180deg, rgba(244, 235, 221, 0.12) 0%, rgba(244, 235, 221, 0.05) 100%);
 }
 
-/* ⚡ NUEVO: CÍRCULO OSCURO CON BORDE DORADO BRILLANTE */
 .club-logo {
     width: 130px;
     height: 130px;
     border-radius: 50%;
-    /* Fondo del mismo tono café que el fondo, con un leve degradado */
     background: radial-gradient(circle at 30% 30%, rgba(74, 51, 38, 0.9) 0%, rgba(24, 32, 27, 0.95) 100%);
     border: 3px solid var(--oro-terrenal);
     display: flex;
@@ -1483,7 +1474,6 @@ img { max-width: 100%; display: block; }
         inset 0 0 30px rgba(182, 138, 69, 0.15);
 }
 
-/* Brillo adicional detrás del logo */
 .club-logo::after {
     content: '';
     position: absolute;
@@ -1503,7 +1493,6 @@ img { max-width: 100%; display: block; }
     transition: transform 0.4s ease;
     position: relative;
     z-index: 1;
-    /* Filtro para dar más brillo a los logos */
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
 }
 
