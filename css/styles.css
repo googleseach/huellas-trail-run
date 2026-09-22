@@ -17,10 +17,16 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* =========================================
+   FIX SCROLL REBOTE iOS
+   ========================================= */
 html { 
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
+    /* FIX: evitar rebote en iOS */
+    overscroll-behavior-y: none;
+    height: 100%;
 }
 
 body {
@@ -30,8 +36,12 @@ body {
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     line-height: 1.6;
+    /* FIX: evitar rebote en iOS */
     overscroll-behavior-y: none;
     -webkit-overflow-scrolling: touch;
+    position: relative;
+    width: 100%;
+    min-height: 100%;
 }
 
 .container {
@@ -60,6 +70,8 @@ img { max-width: 100%; display: block; }
     background-attachment: scroll;
     padding: 40px 20px;
     overflow: hidden;
+    /* FIX: bloquear scroll dentro del hero */
+    overscroll-behavior: contain;
 }
 
 .hero-overlay {
@@ -1423,7 +1435,6 @@ img { max-width: 100%; display: block; }
     -webkit-backdrop-filter: blur(10px);
 }
 
-/* Línea decorativa superior al hover */
 .club-card::before {
     content: '';
     position: absolute;
@@ -1449,37 +1460,40 @@ img { max-width: 100%; display: block; }
     background: linear-gradient(180deg, rgba(244, 235, 221, 0.12) 0%, rgba(244, 235, 221, 0.05) 100%);
 }
 
-/* LOGO CIRCULAR CON BRILLO Y HALO DORADO */
+/* ⚡ NUEVO: CÍRCULO OSCURO CON BORDE DORADO BRILLANTE */
 .club-logo {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #FFFFFF 0%, #F4EBDD 100%);
+    /* Fondo del mismo tono café que el fondo, con un leve degradado */
+    background: radial-gradient(circle at 30% 30%, rgba(74, 51, 38, 0.9) 0%, rgba(24, 32, 27, 0.95) 100%);
     border: 3px solid var(--oro-terrenal);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
     overflow: hidden;
-    padding: 12px;
+    padding: 15px;
     position: relative;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 
-        0 0 0 6px rgba(182, 138, 69, 0.15),
-        0 8px 25px rgba(0, 0, 0, 0.4),
-        inset 0 2px 10px rgba(255, 255, 255, 0.5);
+        0 0 0 6px rgba(182, 138, 69, 0.2),
+        0 0 25px rgba(182, 138, 69, 0.4),
+        0 8px 25px rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(182, 138, 69, 0.15);
 }
 
-/* Halo brillante detrás del logo */
+/* Brillo adicional detrás del logo */
 .club-logo::after {
     content: '';
     position: absolute;
-    inset: -8px;
+    inset: -15px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(182, 138, 69, 0.4) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(182, 138, 69, 0.5) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: -1;
+    pointer-events: none;
 }
 
 .club-logo img {
@@ -1489,15 +1503,18 @@ img { max-width: 100%; display: block; }
     transition: transform 0.4s ease;
     position: relative;
     z-index: 1;
+    /* Filtro para dar más brillo a los logos */
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
 }
 
 .club-card:hover .club-logo {
     transform: scale(1.08);
-    border-color: var(--oro-terrenal);
+    border-color: #D4A55E;
     box-shadow: 
-        0 0 0 8px rgba(182, 138, 69, 0.25),
-        0 12px 35px rgba(0, 0, 0, 0.5),
-        inset 0 2px 15px rgba(255, 255, 255, 0.6);
+        0 0 0 8px rgba(182, 138, 69, 0.3),
+        0 0 40px rgba(182, 138, 69, 0.6),
+        0 12px 35px rgba(0, 0, 0, 0.6),
+        inset 0 0 40px rgba(182, 138, 69, 0.25);
 }
 
 .club-card:hover .club-logo::after {
@@ -1506,11 +1523,12 @@ img { max-width: 100%; display: block; }
 
 .club-card:hover .club-logo img {
     transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
 }
 
 .club-placeholder {
     font-size: 0.75rem;
-    color: var(--tierra-profunda);
+    color: var(--oro-terrenal);
     letter-spacing: 2px;
     font-weight: 700;
 }
@@ -1762,17 +1780,28 @@ footer {
         gap: 15px; 
         max-width: 100%;
     }
-    .club-logo { width: 90px; height: 90px; padding: 8px; border-width: 2px; }
+    .club-logo { 
+        width: 100px; 
+        height: 100px; 
+        padding: 12px; 
+        border-width: 2px;
+        box-shadow: 
+            0 0 0 4px rgba(182, 138, 69, 0.2),
+            0 0 15px rgba(182, 138, 69, 0.4),
+            0 6px 18px rgba(0, 0, 0, 0.5),
+            inset 0 0 20px rgba(182, 138, 69, 0.15);
+    }
     .club-card { padding: 22px 12px 18px; border-radius: 15px; }
     .club-card h3 { font-size: 1.1rem; }
     .club-card p { font-size: 0.7rem; }
-    .club-logo::after { inset: -6px; }
+    .club-logo::after { inset: -8px; }
     
     .club-card:hover .club-logo {
         box-shadow: 
-            0 0 0 6px rgba(182, 138, 69, 0.25),
-            0 8px 25px rgba(0, 0, 0, 0.5),
-            inset 0 2px 10px rgba(255, 255, 255, 0.6);
+            0 0 0 6px rgba(182, 138, 69, 0.3),
+            0 0 30px rgba(182, 138, 69, 0.6),
+            0 10px 28px rgba(0, 0, 0, 0.6),
+            inset 0 0 30px rgba(182, 138, 69, 0.25);
     }
 
     footer { padding: 40px 20px 100px; }

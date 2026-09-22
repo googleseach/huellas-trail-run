@@ -2,7 +2,7 @@
    HUELLAS HACIENDA TRAIL RUN - SCRIPT
    ========================================= */
 
-// ⚡ NUEVO: Calcular altura real del viewport para móviles (evita el "temblor" en iOS)
+// ⚡ Calcular altura real del viewport (evita el "temblor" en iOS)
 function setVH() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -10,6 +10,33 @@ function setVH() {
 setVH();
 window.addEventListener('resize', setVH);
 window.addEventListener('orientationchange', setVH);
+
+// ⚡ Prevenir scroll rebote en iOS (evita que la pantalla se mueva sola)
+document.addEventListener('touchmove', function(e) {
+    // Permitir scroll dentro de contenedores con scroll propio
+    if (e.target.closest('.carrusel-viewport')) return;
+    // Permitir scroll normal
+    return;
+}, { passive: true });
+
+// ⚡ Bloquear rebote cuando el scroll está en los extremos
+let lastScrollTop = 0;
+window.addEventListener('scroll', function() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    
+    // Si estamos en el top y se intenta hacer scroll hacia arriba
+    if (scrollTop <= 0) {
+        window.scrollTo(0, 0);
+    }
+    // Si estamos en el bottom y se intenta hacer scroll hacia abajo
+    if (scrollTop + clientHeight >= scrollHeight) {
+        window.scrollTo(0, scrollHeight - clientHeight);
+    }
+    
+    lastScrollTop = scrollTop;
+}, { passive: true });
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🌿 Sistema HUELLAS iniciado correctamente.');
@@ -168,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // =========================================
     // 4. ANIMACIÓN DE APARICIÓN (SOLO EN DESKTOP)
-    // ⚡ NUEVO: Deshabilitada en móvil para evitar el "temblor"
     // =========================================
     const esMovil = window.matchMedia('(max-width: 767px)').matches;
     
