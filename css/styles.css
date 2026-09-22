@@ -12,7 +12,6 @@
     --carbon-bosque: #18201B;
     --font-titulos: 'Cormorant Garamond', serif;
     --font-textos: 'Montserrat', sans-serif;
-    /* NUEVO: altura del viewport dinámica para móviles */
     --vh: 1vh;
 }
 
@@ -20,9 +19,7 @@
 
 html { 
     scroll-behavior: smooth;
-    /* NUEVO: prevenir zoom accidental en iOS al hacer foco en inputs */
     -webkit-text-size-adjust: 100%;
-    /* NUEVO: estabilizar el scroll */
     overflow-x: hidden;
 }
 
@@ -33,9 +30,7 @@ body {
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     line-height: 1.6;
-    /* NUEVO: evitar que iOS haga scroll de rebote */
     overscroll-behavior-y: none;
-    /* NUEVO: mejorar scroll táctil */
     -webkit-overflow-scrolling: touch;
 }
 
@@ -51,11 +46,10 @@ img { max-width: 100%; display: block; }
 .hidden-section { display: none; }
 
 /* =========================================
-   HERO - CORREGIDO PARA MÓVIL
+   HERO
    ========================================= */
 .hero {
     position: relative;
-    /* NUEVO: altura estable en móviles usando --vh */
     min-height: calc(var(--vh, 1vh) * 100);
     height: calc(var(--vh, 1vh) * 100);
     display: flex;
@@ -190,7 +184,6 @@ img { max-width: 100%; display: block; }
     border: 1px solid var(--oro-terrenal);
     margin-bottom: 25px;
     box-shadow: 0 6px 20px rgba(116, 31, 44, 0.5);
-    /* NUEVO: mejor tap en móvil */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -328,7 +321,6 @@ img { max-width: 100%; display: block; }
     position: relative;
     margin: 0 auto;
     padding: 30px 0;
-    /* NUEVO: prevenir scroll horizontal accidental */
     touch-action: pan-y;
 }
 
@@ -934,7 +926,6 @@ img { max-width: 100%; display: block; }
     border: 1px solid rgba(22, 58, 42, 0.2);
     border-radius: 6px;
     font-family: var(--font-textos);
-    /* NUEVO: 16px evita el zoom automático en iOS al hacer foco */
     font-size: 16px;
     color: var(--carbon-bosque);
     background-color: #FDFBF7;
@@ -960,7 +951,6 @@ img { max-width: 100%; display: block; }
     border: 1px solid rgba(22, 58, 42, 0.2);
     border-radius: 6px;
     font-family: var(--font-textos);
-    /* NUEVO: 16px evita zoom en iOS */
     font-size: 16px;
     color: var(--carbon-bosque);
     background-color: #FDFBF7;
@@ -1371,7 +1361,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================
-   CLUBES
+   CLUBES Y COMUNIDADES ALIADAS
    ========================================= */
 .clubes {
     background-color: var(--tierra-profunda);
@@ -1395,7 +1385,7 @@ img { max-width: 100%; display: block; }
 .clubes-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 25px;
     max-width: 700px;
     margin: 0 auto 40px;
 }
@@ -1414,23 +1404,45 @@ img { max-width: 100%; display: block; }
     transform: translateY(-5px);
 }
 
+/* LOGO CIRCULAR CON FONDO BLANCO Y BORDE DORADO */
 .club-logo {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    background-color: rgba(24, 32, 27, 0.5);
-    border: 2px dashed rgba(182, 138, 69, 0.5);
+    background-color: #FFFFFF;
+    border: 2px solid var(--oro-terrenal);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 15px;
+    margin: 0 auto 18px;
+    overflow: hidden;
+    padding: 10px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(182, 138, 69, 0.2);
+}
+
+.club-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.club-card:hover .club-logo {
+    transform: scale(1.05);
+    border-color: var(--oro-terrenal);
+    box-shadow: 0 8px 25px rgba(182, 138, 69, 0.4);
+}
+
+.club-card:hover .club-logo img {
+    transform: scale(1.08);
 }
 
 .club-placeholder {
-    font-size: 0.65rem;
-    color: var(--oro-terrenal);
+    font-size: 0.7rem;
+    color: var(--tierra-profunda);
     letter-spacing: 2px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .club-card h3 {
@@ -1438,6 +1450,7 @@ img { max-width: 100%; display: block; }
     font-size: 1.2rem;
     color: var(--marfil-sendero);
     margin-bottom: 5px;
+    letter-spacing: 0.5px;
 }
 
 .club-card p {
@@ -1614,34 +1627,22 @@ footer {
    RESPONSIVE
    ========================================= */
 @media (max-width: 767px) {
-    /* NUEVO: reducir el Hero para móvil y estabilizarlo */
     .hero {
         min-height: calc(var(--vh, 1vh) * 100);
         height: calc(var(--vh, 1vh) * 100);
         padding: 20px 20px 30px;
     }
 
-    .hero-content {
-        max-height: none;
-    }
-
+    .hero-content { max-height: none; }
     .logo-oficial { max-width: 220px; }
-
     .brand-logo { font-size: 2.8rem; }
-
     .distances { font-size: 2.2rem; margin-bottom: 20px; }
-
     .countdown { gap: 10px; padding: 15px 0; margin-bottom: 20px; }
-
     .countdown-number { font-size: 2rem; }
-
     .countdown-label { font-size: 0.6rem; letter-spacing: 1px; }
-
     .tagline { font-size: 1rem; padding: 12px 15px; }
-
     .btn-primary { padding: 15px 30px; font-size: 0.9rem; margin-bottom: 20px; }
 
-    /* Carrusel en móvil */
     .carrusel-viewport { max-width: 100%; padding: 15px 0; }
     .carrusel-slide.active { flex: 0 0 220px; height: 320px; }
     .carrusel-slide.prev,
@@ -1653,21 +1654,19 @@ footer {
     .carrusel-arrow-prev { left: 5px; }
     .carrusel-arrow-next { right: 5px; }
 
-    /* Precios en móvil */
     .card-header h3 { font-size: 3.5rem; }
     .price { font-size: 3rem; }
     .card-badge { top: 15px; right: 15px; font-size: 0.6rem; padding: 5px 12px; }
 
-    /* Formulario en móvil */
     .form-intro-title { font-size: 2.2rem; }
     .inscripcion-form { padding: 30px 20px; }
     .form-row { grid-template-columns: 1fr; }
     .cuenta-numero { font-size: 1.6rem; }
 
-    /* Clubes en móvil */
-    .clubes-grid { grid-template-columns: repeat(2, 1fr); }
+    .clubes-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .club-logo { width: 85px; height: 85px; padding: 8px; }
+    .club-card h3 { font-size: 1rem; }
 
-    /* Footer en móvil */
     footer { padding: 40px 20px 100px; }
 }
 
