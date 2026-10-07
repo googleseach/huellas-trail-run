@@ -2,6 +2,7 @@
    HUELLAS HACIENDA TRAIL RUN - SCRIPT
    ========================================= */
 
+// ⚡ Calcular altura real del viewport (evita el "temblor" en iOS)
 function setVH() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -10,26 +11,8 @@ setVH();
 window.addEventListener('resize', setVH);
 window.addEventListener('orientationchange', setVH);
 
-document.addEventListener('touchmove', function(e) {
-    if (e.target.closest('.carrusel-viewport')) return;
-    return;
-}, { passive: true });
-
-let lastScrollTop = 0;
-window.addEventListener('scroll', function() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
-    
-    if (scrollTop <= 0) {
-        window.scrollTo(0, 0);
-    }
-    if (scrollTop + clientHeight >= scrollHeight) {
-        window.scrollTo(0, scrollHeight - clientHeight);
-    }
-    
-    lastScrollTop = scrollTop;
-}, { passive: true });
+// ⚡ NO hacemos rebote bloqueado (causa saltos en PC)
+// El scroll es completamente natural
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🌿 Sistema HUELLAS iniciado correctamente.');
@@ -182,27 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // 4. ANIMACIÓN DE APARICIÓN (SOLO EN DESKTOP)
+    // 4. ANIMACIÓN DE APARICIÓN
+    // ⚡ ELIMINADA COMPLETAMENTE
+    // Los elementos aparecen directamente sin movimiento
     // =========================================
-    const esMovil = window.matchMedia('(max-width: 767px)').matches;
-    
-    if (!esMovil) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.pillar, .card, .detalle-item, .sponsor-box, .club-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    }
 
     // =========================================
     // 5. BOTONES DE INSCRIPCIÓN DE LAS TARJETAS
