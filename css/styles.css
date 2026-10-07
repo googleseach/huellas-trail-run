@@ -1197,6 +1197,7 @@ img { max-width: 100%; display: block; }
 
 .pago-resumen strong { color: var(--oro-terrenal); }
 
+/* BLOQUE DEL TITULAR DE LAS CUENTAS */
 .pago-titular {
     background: linear-gradient(135deg, rgba(182, 138, 69, 0.15) 0%, rgba(182, 138, 69, 0.05) 100%);
     border: 1px solid rgba(182, 138, 69, 0.4);
@@ -1268,6 +1269,16 @@ img { max-width: 100%; display: block; }
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(22, 58, 42, 0.1);
     margin-bottom: 20px;
+}
+
+/* ⚡ NUEVO: LOGO DEL BANCO */
+.banco-logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 12px;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
 }
 
 .cuenta-banco {
@@ -1347,6 +1358,73 @@ img { max-width: 100%; display: block; }
 .btn-copiar:hover { background-color: var(--verde-huella); color: var(--marfil-sendero); }
 .btn-copiar svg { width: 14px; height: 14px; }
 .btn-copiar.copiado { background-color: var(--oro-terrenal); color: var(--carbon-bosque); border-color: var(--oro-terrenal); }
+
+/* ⚡ NUEVO: BLOQUE DE INSTRUCCIÓN COMENTARIO DEL DEPÓSITO */
+.pago-comentario {
+    background: linear-gradient(135deg, rgba(116, 31, 44, 0.15) 0%, rgba(116, 31, 44, 0.05) 100%);
+    border: 2px solid var(--vino-tierra);
+    border-radius: 12px;
+    padding: 25px 20px;
+    max-width: 550px;
+    margin: 0 auto 30px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(116, 31, 44, 0.2);
+}
+
+.comentario-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(116, 31, 44, 0.3));
+}
+
+.comentario-texto {
+    text-align: left;
+    flex: 1;
+}
+
+.comentario-titulo {
+    font-size: 0.85rem;
+    color: var(--vino-tierra);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.comentario-titulo strong {
+    color: var(--oro-terrenal);
+}
+
+.comentario-texto p {
+    font-size: 0.9rem;
+    color: var(--marfil-sendero);
+    line-height: 1.5;
+    margin: 3px 0;
+}
+
+.comentario-texto strong {
+    color: var(--oro-terrenal);
+    font-weight: 700;
+}
+
+.comentario-ejemplo {
+    font-family: var(--font-titulos);
+    font-size: 1rem;
+    color: var(--oro-terrenal);
+    margin-top: 8px !important;
+    opacity: 0.9;
+}
+
+.comentario-ejemplo em {
+    color: var(--marfil-sendero);
+    font-style: italic;
+    background-color: rgba(182, 138, 69, 0.15);
+    padding: 3px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
 
 .pago-instrucciones {
     background-color: rgba(244, 235, 221, 0.05);
@@ -1803,6 +1881,30 @@ footer {
     .form-row { grid-template-columns: 1fr; }
     .cuenta-numero { font-size: 1.6rem; }
     .titular-nombre { font-size: 1.4rem; }
+
+    /* Logo banco responsive */
+    .banco-logo-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Comentario depósito responsive */
+    .pago-comentario {
+        padding: 20px 15px;
+        gap: 12px;
+    }
+    
+    .comentario-icon {
+        font-size: 2rem;
+    }
+    
+    .comentario-titulo {
+        font-size: 0.75rem;
+    }
+    
+    .comentario-texto p {
+        font-size: 0.8rem;
+    }
 
     .clubes-grid { 
         grid-template-columns: repeat(2, 1fr); 
