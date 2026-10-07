@@ -1226,12 +1226,14 @@ img { max-width: 100%; display: block; }
     letter-spacing: 1px;
 }
 
+/* ⚡ CÉDULA DE MELISSA EN BLANCO PURO PARA CONTRASTAR */
 .titular-cedula {
-    font-size: 0.9rem;
-    color: var(--marfil-sendero);
-    opacity: 0.85;
+    font-size: 0.95rem;
+    color: #FFFFFF;
+    font-weight: 600;
     margin-bottom: 8px;
     letter-spacing: 1px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .titular-tipo {
@@ -1271,14 +1273,14 @@ img { max-width: 100%; display: block; }
     margin-bottom: 20px;
 }
 
-/* ⚡ NUEVO: LOGO DEL BANCO */
+/* ⚡ LOGO DEL BANCO MÁS GRANDE: 100px */
 .banco-logo-img {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
     display: block;
-    margin: 0 auto 12px;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
+    margin: 0 auto 15px;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.15));
 }
 
 .cuenta-banco {
@@ -1359,7 +1361,7 @@ img { max-width: 100%; display: block; }
 .btn-copiar svg { width: 14px; height: 14px; }
 .btn-copiar.copiado { background-color: var(--oro-terrenal); color: var(--carbon-bosque); border-color: var(--oro-terrenal); }
 
-/* ⚡ NUEVO: BLOQUE DE INSTRUCCIÓN COMENTARIO DEL DEPÓSITO */
+/* BLOQUE DE INSTRUCCIÓN COMENTARIO DEL DEPÓSITO */
 .pago-comentario {
     background: linear-gradient(135deg, rgba(116, 31, 44, 0.15) 0%, rgba(116, 31, 44, 0.05) 100%);
     border: 2px solid var(--vino-tierra);
@@ -1386,7 +1388,7 @@ img { max-width: 100%; display: block; }
 
 .comentario-titulo {
     font-size: 0.85rem;
-    color: var(--vino-tierra);
+    color: var(--marfil-sendero);
     letter-spacing: 1px;
     margin-bottom: 6px;
     text-transform: uppercase;
@@ -1409,21 +1411,25 @@ img { max-width: 100%; display: block; }
     font-weight: 700;
 }
 
+/* ⚡ CÉDULA DEL EJEMPLO EN BLANCO PURO PARA CONTRASTAR */
 .comentario-ejemplo {
     font-family: var(--font-titulos);
     font-size: 1rem;
-    color: var(--oro-terrenal);
+    color: var(--marfil-sendero);
     margin-top: 8px !important;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .comentario-ejemplo em {
-    color: var(--marfil-sendero);
+    color: #FFFFFF;
     font-style: italic;
-    background-color: rgba(182, 138, 69, 0.15);
+    font-weight: 700;
+    background-color: rgba(182, 138, 69, 0.25);
     padding: 3px 10px;
     border-radius: 5px;
     display: inline-block;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .pago-instrucciones {
@@ -1882,10 +1888,10 @@ footer {
     .cuenta-numero { font-size: 1.6rem; }
     .titular-nombre { font-size: 1.4rem; }
 
-    /* Logo banco responsive */
+    /* Logo banco responsive: 80px en móvil */
     .banco-logo-img {
-        width: 50px;
-        height: 50px;
+        width: 80px;
+        height: 80px;
     }
 
     /* Comentario depósito responsive */
