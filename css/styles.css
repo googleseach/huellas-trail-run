@@ -760,7 +760,7 @@ img { max-width: 100%; display: block; }
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--oro-terrenal);
-    letter-spacing: 1px;
+    letter-spacing: 3px;
 }
 
 /* =========================================
@@ -1178,7 +1178,7 @@ img { max-width: 100%; display: block; }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.pago-intro { text-align: center; margin-bottom: 50px; }
+.pago-intro { text-align: center; margin-bottom: 40px; }
 
 .pago-icon { font-size: 2.5rem; display: block; margin-bottom: 15px; }
 
@@ -1201,6 +1201,56 @@ img { max-width: 100%; display: block; }
 }
 
 .pago-resumen strong { color: var(--oro-terrenal); }
+
+/* ⚡ NUEVO: BLOQUE DEL TITULAR DE LAS CUENTAS */
+.pago-titular {
+    background: linear-gradient(135deg, rgba(182, 138, 69, 0.15) 0%, rgba(182, 138, 69, 0.05) 100%);
+    border: 1px solid rgba(182, 138, 69, 0.4);
+    border-radius: 12px;
+    padding: 25px 20px;
+    max-width: 550px;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+
+.titular-label {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--oro-terrenal);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.titular-nombre {
+    font-family: var(--font-titulos);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--marfil-sendero);
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.titular-cedula {
+    font-size: 0.9rem;
+    color: var(--marfil-sendero);
+    opacity: 0.85;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.titular-tipo {
+    display: inline-block;
+    background-color: var(--verde-huella);
+    color: var(--marfil-sendero);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--oro-terrenal);
+}
 
 .pago-cuentas {
     display: flex;
@@ -1368,7 +1418,6 @@ img { max-width: 100%; display: block; }
 
 /* =========================================
    CLUBES Y COMUNIDADES ALIADAS
-   ESTILO ORIGINAL: CÍRCULO OSCURO + HALO DORADO
    ========================================= */
 .clubes {
     background: linear-gradient(180deg, var(--tierra-profunda) 0%, #3A2619 100%);
@@ -1454,7 +1503,6 @@ img { max-width: 100%; display: block; }
     background: linear-gradient(180deg, rgba(244, 235, 221, 0.12) 0%, rgba(244, 235, 221, 0.05) 100%);
 }
 
-/* ⚡ CÍRCULO OSCURO ORIGINAL CON HALO DORADO */
 .club-logo {
     width: 130px;
     height: 130px;
@@ -1765,6 +1813,7 @@ footer {
     .inscripcion-form { padding: 30px 20px; }
     .form-row { grid-template-columns: 1fr; }
     .cuenta-numero { font-size: 1.6rem; }
+    .titular-nombre { font-size: 1.4rem; }
 
     .clubes-grid { 
         grid-template-columns: repeat(2, 1fr); 

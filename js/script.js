@@ -2,7 +2,6 @@
    HUELLAS HACIENDA TRAIL RUN - SCRIPT
    ========================================= */
 
-// ⚡ Calcular altura real del viewport (evita el "temblor" en iOS)
 function setVH() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -11,7 +10,6 @@ setVH();
 window.addEventListener('resize', setVH);
 window.addEventListener('orientationchange', setVH);
 
-// ⚡ Prevenir scroll rebote en iOS
 document.addEventListener('touchmove', function(e) {
     if (e.target.closest('.carrusel-viewport')) return;
     return;
