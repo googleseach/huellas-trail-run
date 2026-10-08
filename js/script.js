@@ -11,14 +11,15 @@ setVH();
 window.addEventListener('resize', setVH);
 window.addEventListener('orientationchange', setVH);
 
-// ⚡ NO hacemos rebote bloqueado (causa saltos en PC)
-// El scroll es completamente natural
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🌿 Sistema HUELLAS iniciado correctamente.');
 
     const NUMERO_WHATSAPP = '18492205138';
     const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbx84D_EGPmmvoWuVzutUiUQZYlXAD9nMNsfxFJFP-6ldtgavgDzkgJfNaQBM73ivWW0LQ/exec';
+
+    const PRECIO_5K = 1600;
+    const PRECIO_10K = 1800;
+    const PRECIO_TRANSPORTE = 350;
 
     const CLUBES_EXTRA = [];
 
@@ -165,13 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // 4. ANIMACIÓN DE APARICIÓN
-    // ⚡ ELIMINADA COMPLETAMENTE
-    // Los elementos aparecen directamente sin movimiento
-    // =========================================
-
-    // =========================================
-    // 5. BOTONES DE INSCRIPCIÓN DE LAS TARJETAS
+    // 4. BOTONES DE INSCRIPCIÓN DE LAS TARJETAS
     // =========================================
     document.querySelectorAll('.btn-card').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -188,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // 6. FORMULARIO DE INSCRIPCIÓN
+    // 5. FORMULARIO DE INSCRIPCIÓN
     // =========================================
     const form = document.getElementById('inscripcionForm');
     const seccionFormulario = document.getElementById('formulario');
@@ -209,6 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const formData = new FormData(form);
+            const usaTransporte = formData.get('transporte') === 'Sí';
+            
             datosInscripcion = {
                 nombre: formData.get('nombre'),
                 cedula: formData.get('cedula'),
@@ -218,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 distancia: formData.get('distancia'),
                 talla: formData.get('talla'),
                 club: formData.get('club') || 'Ninguno',
+                transporte: usaTransporte ? 'Sí (desde la Basílica)' : 'No',
                 emergenciaNombre: formData.get('emergencia-nombre'),
                 emergenciaTelefono: formData.get('emergencia-telefono'),
                 condiciones: formData.get('condiciones') || 'Ninguna'
@@ -244,16 +242,49 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSubmit.innerHTML = textoOriginal;
             btnSubmit.disabled = false;
 
-            const precio = datosInscripcion.distancia === '10K' ? 'RD$ 1,800' : 'RD$ 1,600';
+            // Calcular montos
+            const precioInscripcion = datosInscripcion.distancia === '10K' ? PRECIO_10K : PRECIO_5K;
+            const precioTransporte = usaTransporte ? PRECIO_TRANSPORTE : 0;
+            const total = precioInscripcion + precioTransporte;
             
-            pagoResumen.innerHTML = `
-                <p><strong>Corredor:</strong> ${datosInscripcion.nombre}</p>
-                <p><strong>Cédula:</strong> ${datosInscripcion.cedula}</p>
-                <p><strong>Distancia:</strong> ${datosInscripcion.distancia}</p>
-                <p><strong>Talla de camiseta:</strong> ${datosInscripcion.talla}</p>
-                <p><strong>Club:</strong> ${datosInscripcion.club}</p>
-                <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(182, 138, 69, 0.4);"><strong>Monto a pagar:</strong> ${precio}</p>
+            // Formatear números con separador de miles
+            const formatoRD = (num) => 'RD$ ' + num.toLocaleString('es-DO');
+
+            // Generar resumen detallado
+            let resumenHTML = `
+                <div class="resumen-titulo">Resumen de tu inscripción</div>
+                
+                <div class="resumen-linea">
+                    <span class="resumen-concepto">Inscripción ${datosInscripcion.distancia}</span>
+                    <span class="resumen-monto">${formatoRD(precioInscripcion)}</span>
+                </div>
             `;
+            
+            if (usaTransporte) {
+                resumenHTML += `
+                    <div class="resumen-linea">
+                        <span class="resumen-concepto">Transporte desde la Basílica</span>
+                        <span class="resumen-monto">${formatoRD(precioTransporte)}</span>
+                    </div>
+                `;
+            }
+            
+            resumenHTML += `
+                <div class="resumen-total">
+                    <span class="resumen-concepto">TOTAL A PAGAR</span>
+                    <span class="resumen-monto">${formatoRD(total)}</span>
+                </div>
+                
+                <div class="resumen-datos">
+                    <p><strong>Corredor:</strong> ${datosInscripcion.nombre}</p>
+                    <p><strong>Cédula:</strong> ${datosInscripcion.cedula}</p>
+                    <p><strong>Talla de camiseta:</strong> ${datosInscripcion.talla}</p>
+                    <p><strong>Club:</strong> ${datosInscripcion.club}</p>
+                    ${usaTransporte ? '<p><strong>🚌 Transporte:</strong> Sí — Sale 6:00 AM desde la Basílica de Higüey</p>' : ''}
+                </div>
+            `;
+
+            pagoResumen.innerHTML = resumenHTML;
 
             seccionFormulario.classList.add('hidden-section');
             seccionPago.classList.remove('hidden-section');
@@ -265,15 +296,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 7. BOTÓN ENVIAR COMPROBANTE POR WHATSAPP
+    // 6. BOTÓN ENVIAR COMPROBANTE POR WHATSAPP
     // =========================================
     if (btnEnviarComprobante) {
         btnEnviarComprobante.addEventListener('click', (e) => {
             e.preventDefault();
 
-            const precio = datosInscripcion.distancia === '10K' ? 'RD$ 1,800' : 'RD$ 1,600';
+            const usaTransporte = datosInscripcion.transporte && datosInscripcion.transporte.includes('Sí');
+            const precioInscripcion = datosInscripcion.distancia === '10K' ? PRECIO_10K : PRECIO_5K;
+            const precioTransporte = usaTransporte ? PRECIO_TRANSPORTE : 0;
+            const total = precioInscripcion + precioTransporte;
+            
+            const formatoRD = (num) => 'RD$ ' + num.toLocaleString('es-DO');
 
-            const mensaje = `¡Hola! Acabo de realizar el pago de mi inscripción a HUELLAS Hacienda Trail Run. 🌿
+            let mensaje = `¡Hola! Acabo de realizar el pago de mi inscripción a HUELLAS Hacienda Trail Run. 🌿
 
 📋 *DATOS DEL CORREDOR*
 • Nombre: ${datosInscripcion.nombre}
@@ -286,7 +322,20 @@ document.addEventListener('DOMContentLoaded', () => {
 🏃 *INSCRIPCIÓN*
 • Distancia: ${datosInscripcion.distancia}
 • Talla de camiseta: ${datosInscripcion.talla}
-• Monto: ${precio}
+• Monto inscripción: ${formatoRD(precioInscripcion)}`;
+
+            if (usaTransporte) {
+                mensaje += `
+
+🚌 *TRANSPORTE*
+• Servicio: Desde la Basílica de Higüey
+• Hora de salida: 6:00 AM
+• Costo: ${formatoRD(precioTransporte)}`;
+            }
+
+            mensaje += `
+
+💰 *TOTAL PAGADO:* ${formatoRD(total)}
 
 🚨 *CONTACTO DE EMERGENCIA*
 • Nombre: ${datosInscripcion.emergenciaNombre}
@@ -300,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 8. BOTONES COPIAR NÚMERO DE CUENTA
+    // 7. BOTONES COPIAR NÚMERO DE CUENTA
     // =========================================
     document.querySelectorAll('.btn-copiar').forEach(btn => {
         btn.addEventListener('click', async () => {

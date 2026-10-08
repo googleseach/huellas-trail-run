@@ -486,6 +486,21 @@
                     </select>
                 </div>
 
+                <!-- ⚡ NUEVO: TRANSPORTE DESDE LA BASÍLICA -->
+                <div class="form-field form-transporte">
+                    <label class="transporte-label">
+                        <input type="checkbox" id="transporte" name="transporte" value="Sí">
+                        <span class="transporte-box"></span>
+                        <span class="transporte-texto">
+                            <strong>🚌 Agregar transporte desde la Basílica de Higüey</strong>
+                            <span class="transporte-detalle">
+                                Sale a las <strong>6:00 AM</strong> desde la Basílica.<br>
+                                Costo adicional: <strong>+RD$ 350</strong>
+                            </span>
+                        </span>
+                    </label>
+                </div>
+
                 <div class="form-section-title">Contacto de emergencia</div>
 
                 <div class="form-row">
@@ -532,6 +547,8 @@
                 <span class="pago-icon">💳</span>
                 <h2 class="section-title light">INFORMACIÓN DE PAGO</h2>
                 <p class="section-subtitle">Realiza tu transferencia bancaria y luego envía tu comprobante por WhatsApp.</p>
+                
+                <!-- ⚡ RESUMEN DETALLADO DE CARGOS -->
                 <div class="pago-resumen" id="pagoResumen"></div>
             </div>
 
@@ -588,7 +605,7 @@
                 </div>
             </div>
 
-            <!-- ⚡ INSTRUCCIÓN PARA EL COMENTARIO DEL DEPÓSITO -->
+            <!-- INSTRUCCIÓN PARA EL COMENTARIO DEL DEPÓSITO -->
             <div class="pago-comentario">
                 <div class="comentario-icon">📝</div>
                 <div class="comentario-texto">

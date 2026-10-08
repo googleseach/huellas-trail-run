@@ -1054,6 +1054,103 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================
+   OPCIÓN DE TRANSPORTE
+   ========================================= */
+.form-transporte {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.transporte-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(182, 138, 69, 0.1) 0%, rgba(182, 138, 69, 0.03) 100%);
+    border: 2px solid rgba(182, 138, 69, 0.4);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+}
+
+.transporte-label:hover {
+    border-color: var(--oro-terrenal);
+    background: linear-gradient(135deg, rgba(182, 138, 69, 0.15) 0%, rgba(182, 138, 69, 0.05) 100%);
+}
+
+.transporte-label input[type="checkbox"] {
+    display: none;
+}
+
+.transporte-box {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--verde-huella);
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(22, 58, 42, 0.1);
+    display: block;
+    margin-top: 2px;
+}
+
+.transporte-label input[type="checkbox"]:checked + .transporte-box {
+    background-color: var(--verde-huella);
+    border-color: var(--verde-huella);
+    box-shadow: 0 3px 10px rgba(22, 58, 42, 0.4);
+}
+
+.transporte-label input[type="checkbox"]:checked + .transporte-box::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.transporte-texto {
+    flex: 1;
+    font-family: var(--font-textos);
+    font-size: 0.9rem;
+    color: var(--tierra-profunda);
+    line-height: 1.5;
+    pointer-events: none;
+}
+
+.transporte-texto strong {
+    color: var(--vino-tierra);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+}
+
+.transporte-detalle {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--tierra-profunda);
+    opacity: 0.9;
+    margin-top: 4px;
+    line-height: 1.6;
+}
+
+.transporte-detalle strong {
+    color: var(--oro-terrenal);
+    display: inline;
+    font-size: 0.9rem;
+}
+
+/* =========================================
    CHECKBOX TÉRMINOS
    ========================================= */
 .form-checkbox {
@@ -1177,27 +1274,108 @@ img { max-width: 100%; display: block; }
 
 .pago-icon { font-size: 2.5rem; display: block; margin-bottom: 15px; }
 
+/* =========================================
+   RESUMEN DETALLADO DE PAGO
+   ========================================= */
 .pago-resumen {
     background-color: rgba(182, 138, 69, 0.1);
-    border: 1px solid var(--oro-terrenal);
-    border-radius: 8px;
-    padding: 20px;
+    border: 2px solid var(--oro-terrenal);
+    border-radius: 12px;
+    padding: 25px 22px;
     margin-top: 25px;
     text-align: left;
-    max-width: 500px;
+    max-width: 550px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.pago-resumen p {
+.resumen-titulo {
+    font-family: var(--font-titulos);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--oro-terrenal);
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(182, 138, 69, 0.4);
+    text-transform: uppercase;
+}
+
+.resumen-linea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 0.9rem;
+    color: var(--marfil-sendero);
+    border-bottom: 1px dashed rgba(182, 138, 69, 0.2);
+}
+
+.resumen-linea:last-of-type {
+    border-bottom: none;
+}
+
+.resumen-linea .resumen-concepto {
+    font-weight: 500;
+    opacity: 0.95;
+}
+
+.resumen-linea .resumen-monto {
+    font-family: var(--font-titulos);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--marfil-sendero);
+    letter-spacing: 1px;
+}
+
+.resumen-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 2px solid var(--oro-terrenal);
+}
+
+.resumen-total .resumen-concepto {
+    font-family: var(--font-titulos);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--oro-terrenal);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.resumen-total .resumen-monto {
+    font-family: var(--font-titulos);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--oro-terrenal);
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(182, 138, 69, 0.4);
+}
+
+.resumen-datos {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(182, 138, 69, 0.3);
     font-size: 0.85rem;
     color: var(--marfil-sendero);
+    opacity: 0.85;
+}
+
+.resumen-datos p {
     margin: 5px 0;
 }
 
-.pago-resumen strong { color: var(--oro-terrenal); }
+.resumen-datos strong {
+    color: var(--oro-terrenal);
+}
 
-/* BLOQUE DEL TITULAR DE LAS CUENTAS */
+/* =========================================
+   BLOQUE DEL TITULAR DE LAS CUENTAS
+   ========================================= */
 .pago-titular {
     background: linear-gradient(135deg, rgba(182, 138, 69, 0.15) 0%, rgba(182, 138, 69, 0.05) 100%);
     border: 1px solid rgba(182, 138, 69, 0.4);
@@ -1226,7 +1404,6 @@ img { max-width: 100%; display: block; }
     letter-spacing: 1px;
 }
 
-/* ⚡ CÉDULA DE MELISSA EN BLANCO PURO PARA CONTRASTAR */
 .titular-cedula {
     font-size: 0.95rem;
     color: #FFFFFF;
@@ -1249,6 +1426,9 @@ img { max-width: 100%; display: block; }
     border: 1px solid var(--oro-terrenal);
 }
 
+/* =========================================
+   TARJETAS DE CUENTAS BANCARIAS
+   ========================================= */
 .pago-cuentas {
     display: flex;
     flex-direction: column;
@@ -1273,7 +1453,6 @@ img { max-width: 100%; display: block; }
     margin-bottom: 20px;
 }
 
-/* ⚡ LOGO DEL BANCO MÁS GRANDE: 100px */
 .banco-logo-img {
     width: 100px;
     height: 100px;
@@ -1361,7 +1540,9 @@ img { max-width: 100%; display: block; }
 .btn-copiar svg { width: 14px; height: 14px; }
 .btn-copiar.copiado { background-color: var(--oro-terrenal); color: var(--carbon-bosque); border-color: var(--oro-terrenal); }
 
-/* BLOQUE DE INSTRUCCIÓN COMENTARIO DEL DEPÓSITO */
+/* =========================================
+   INSTRUCCIÓN COMENTARIO DEL DEPÓSITO
+   ========================================= */
 .pago-comentario {
     background: linear-gradient(135deg, rgba(116, 31, 44, 0.15) 0%, rgba(116, 31, 44, 0.05) 100%);
     border: 2px solid var(--vino-tierra);
@@ -1411,7 +1592,6 @@ img { max-width: 100%; display: block; }
     font-weight: 700;
 }
 
-/* ⚡ CÉDULA DEL EJEMPLO EN BLANCO PURO PARA CONTRASTAR */
 .comentario-ejemplo {
     font-family: var(--font-titulos);
     font-size: 1rem;
@@ -1888,13 +2068,11 @@ footer {
     .cuenta-numero { font-size: 1.6rem; }
     .titular-nombre { font-size: 1.4rem; }
 
-    /* Logo banco responsive: 80px en móvil */
     .banco-logo-img {
         width: 80px;
         height: 80px;
     }
 
-    /* Comentario depósito responsive */
     .pago-comentario {
         padding: 20px 15px;
         gap: 12px;
@@ -1910,6 +2088,46 @@ footer {
     
     .comentario-texto p {
         font-size: 0.8rem;
+    }
+
+    /* Resumen de pago responsive */
+    .pago-resumen {
+        padding: 20px 18px;
+    }
+    
+    .resumen-titulo {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+    
+    .resumen-linea {
+        font-size: 0.85rem;
+    }
+    
+    .resumen-linea .resumen-monto {
+        font-size: 1rem;
+    }
+    
+    .resumen-total .resumen-concepto {
+        font-size: 1rem;
+    }
+    
+    .resumen-total .resumen-monto {
+        font-size: 1.6rem;
+    }
+
+    /* Transporte responsive */
+    .transporte-label {
+        padding: 16px;
+        gap: 12px;
+    }
+    
+    .transporte-texto strong {
+        font-size: 0.85rem;
+    }
+    
+    .transporte-detalle {
+        font-size: 0.75rem;
     }
 
     .clubes-grid { 
