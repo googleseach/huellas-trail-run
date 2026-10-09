@@ -945,6 +945,51 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================
+   FEEDBACK DE VALIDACIÓN DE CÉDULA
+   ========================================= */
+.feedback-cedula {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+    min-height: 20px;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.feedback-cedula.verificando {
+    color: var(--oro-terrenal);
+    opacity: 1;
+    font-style: italic;
+}
+
+.feedback-cedula.exito {
+    color: #2E7D32;
+    opacity: 1;
+}
+
+.feedback-cedula.error {
+    color: var(--vino-tierra);
+    opacity: 1;
+    font-weight: 700;
+}
+
+/* Borde verde cuando la cédula es válida */
+input.input-success {
+    border-color: #2E7D32 !important;
+    background-color: #F1F8F2 !important;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15) !important;
+}
+
+/* Borde rojo cuando la cédula está duplicada */
+input.input-error {
+    border-color: var(--vino-tierra) !important;
+    background-color: #FDF4F5 !important;
+    box-shadow: 0 0 0 3px rgba(116, 31, 44, 0.15) !important;
+}
+
+/* =========================================
    SELECT DE CLUBES
    ========================================= */
 .form-select {
@@ -2090,7 +2135,6 @@ footer {
         font-size: 0.8rem;
     }
 
-    /* Resumen de pago responsive */
     .pago-resumen {
         padding: 20px 18px;
     }
@@ -2116,7 +2160,6 @@ footer {
         font-size: 1.6rem;
     }
 
-    /* Transporte responsive */
     .transporte-label {
         padding: 16px;
         gap: 12px;
@@ -2127,6 +2170,10 @@ footer {
     }
     
     .transporte-detalle {
+        font-size: 0.75rem;
+    }
+
+    .feedback-cedula {
         font-size: 0.75rem;
     }
 
