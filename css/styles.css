@@ -975,14 +975,12 @@ img { max-width: 100%; display: block; }
     font-weight: 700;
 }
 
-/* Borde verde cuando la cédula es válida */
 input.input-success {
     border-color: #2E7D32 !important;
     background-color: #F1F8F2 !important;
     box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15) !important;
 }
 
-/* Borde rojo cuando la cédula está duplicada */
 input.input-error {
     border-color: var(--vino-tierra) !important;
     background-color: #FDF4F5 !important;
@@ -1928,40 +1926,126 @@ input.input-error {
 }
 
 /* =========================================
-   PATROCINADORES
+   PATROCINADORES (MARCAS ALIADAS)
    ========================================= */
 .sponsors {
     background-color: var(--carbon-bosque);
-    padding: 80px 20px;
+    padding: 100px 20px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
+
+.sponsors::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(circle at 80% 20%, rgba(116, 31, 44, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(22, 58, 42, 0.18) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+.sponsors .container { position: relative; z-index: 1; }
 
 .sponsors-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    max-width: 600px;
-    margin: 0 auto 40px;
+    gap: 25px;
+    max-width: 700px;
+    margin: 0 auto 50px;
 }
 
-.sponsor-box {
-    background-color: rgba(244, 235, 221, 0.05);
-    border: 1px dashed rgba(182, 138, 69, 0.4);
-    padding: 35px 15px;
-    border-radius: 10px;
-    font-size: 0.8rem;
-    color: var(--oro-terrenal);
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+.sponsor-card {
+    background: linear-gradient(180deg, rgba(244, 235, 221, 0.08) 0%, rgba(244, 235, 221, 0.03) 100%);
+    border: 1px solid rgba(182, 138, 69, 0.4);
+    border-radius: 20px;
+    padding: 30px 20px 25px;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.sponsor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--oro-terrenal), transparent);
+    transition: width 0.4s ease;
+}
+
+.sponsor-card:hover::before {
+    width: 80%;
+}
+
+.sponsor-card:hover {
+    border-color: var(--oro-terrenal);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(182, 138, 69, 0.2);
+    background: linear-gradient(180deg, rgba(244, 235, 221, 0.12) 0%, rgba(244, 235, 221, 0.05) 100%);
+}
+
+.sponsor-logo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(74, 51, 38, 0.9) 0%, rgba(24, 32, 27, 0.95) 100%);
+    border: 3px solid var(--oro-terrenal);
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    padding: 18px;
+    position: relative;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 
+        0 0 0 6px rgba(182, 138, 69, 0.2),
+        0 0 25px rgba(182, 138, 69, 0.4),
+        0 8px 25px rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(182, 138, 69, 0.15);
 }
 
-.sponsor-box:hover {
-    background-color: rgba(244, 235, 221, 0.1);
-    border-color: var(--oro-terrenal);
+.sponsor-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: filter 0.4s ease;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+.sponsor-card:hover .sponsor-logo {
+    border-color: #D4A55E;
+    box-shadow: 
+        0 0 0 8px rgba(182, 138, 69, 0.3),
+        0 0 40px rgba(182, 138, 69, 0.6),
+        0 12px 35px rgba(0, 0, 0, 0.6),
+        inset 0 0 40px rgba(182, 138, 69, 0.25);
+}
+
+.sponsor-card:hover .sponsor-logo img {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+}
+
+.sponsor-card h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--marfil-sendero);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .btn-sponsor {
@@ -1969,18 +2053,37 @@ input.input-error {
     background-color: transparent;
     color: var(--oro-terrenal);
     text-decoration: none;
-    padding: 15px 30px;
+    padding: 16px 40px;
     border-radius: 5px;
     font-weight: 700;
     font-size: 0.9rem;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     border: 1px solid var(--oro-terrenal);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn-sponsor:hover { background-color: var(--oro-terrenal); color: var(--carbon-bosque); }
+.btn-sponsor::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(182, 138, 69, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-sponsor:hover::before {
+    left: 100%;
+}
+
+.btn-sponsor:hover { 
+    background-color: var(--oro-terrenal); 
+    color: var(--tierra-profunda);
+    box-shadow: 0 10px 30px rgba(182, 138, 69, 0.4);
+}
 
 /* =========================================
    FOOTER
@@ -2177,6 +2280,7 @@ footer {
         font-size: 0.75rem;
     }
 
+    /* Clubes responsive */
     .clubes-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 15px; 
@@ -2206,6 +2310,29 @@ footer {
             inset 0 0 30px rgba(182, 138, 69, 0.25);
     }
 
+    /* Patrocinadores responsive */
+    .sponsors-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 100%;
+    }
+    
+    .sponsor-logo {
+        width: 110px;
+        height: 110px;
+        padding: 14px;
+        border-width: 2px;
+    }
+    
+    .sponsor-card {
+        padding: 22px 12px 18px;
+        border-radius: 15px;
+    }
+    
+    .sponsor-card h3 {
+        font-size: 1.1rem;
+    }
+
     footer { padding: 40px 20px 100px; }
 }
 
@@ -2215,7 +2342,7 @@ footer {
     .cards-container { flex-direction: row; max-width: 900px; justify-content: center; gap: 30px; }
     .card { flex: 1; max-width: 420px; }
     .clubes-grid { grid-template-columns: repeat(4, 1fr); max-width: 1200px; }
-    .sponsors-grid { grid-template-columns: repeat(3, 1fr); max-width: 800px; }
+    .sponsors-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
     .ruta-detalles { grid-template-columns: repeat(4, 1fr); }
     .pricing-footer { flex-direction: row; justify-content: center; gap: 40px; }
     .whatsapp-float { width: 65px; height: 65px; bottom: 30px; right: 30px; }
