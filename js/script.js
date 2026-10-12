@@ -2,7 +2,6 @@
    HUELLAS HACIENDA TRAIL RUN - SCRIPT
    ========================================= */
 
-// ⚡ Calcular altura real del viewport (evita el "temblor" en iOS)
 function setVH() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -21,20 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEntrar = document.getElementById('btnEntrar');
     const contenidoPrincipal = document.getElementById('contenidoPrincipal');
 
-    // Bloquear scroll mientras splash está visible
     document.body.classList.add('splash-active');
 
     if (btnEntrar) {
         btnEntrar.addEventListener('click', () => {
-            // Ocultar splash
             splashScreen.classList.add('fade-out');
             contenidoPrincipal.classList.remove('oculto');
             document.body.classList.remove('splash-active');
             
-            // Permitir scroll
             window.scrollTo(0, 0);
             
-            // Remover splash después de la animación
             setTimeout(() => {
                 splashScreen.style.display = 'none';
             }, 700);
