@@ -51,6 +51,204 @@ img { max-width: 100%; display: block; }
 .hidden-section { display: none; }
 
 /* =========================================
+   PANTALLA DE BIENVENIDA (SPLASH SCREEN)
+   ========================================= */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--carbon-bosque) 0%, var(--verde-huella) 50%, var(--carbon-bosque) 100%);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    overflow-y: auto;
+}
+
+.splash-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(182, 138, 69, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(116, 31, 44, 0.15) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+.splash-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    animation: splashFadeIn 1s ease;
+}
+
+@keyframes splashFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.splash-logo-top {
+    text-align: center;
+}
+
+.splash-brand {
+    font-family: var(--font-titulos);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--marfil-sendero);
+    letter-spacing: 6px;
+    line-height: 1;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.splash-descriptor {
+    font-family: var(--font-textos);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color: var(--oro-terrenal);
+    margin-top: 8px;
+    text-transform: uppercase;
+}
+
+.splash-video-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.splash-video-frame {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid var(--oro-terrenal);
+    box-shadow: 
+        0 0 0 6px rgba(182, 138, 69, 0.2),
+        0 0 30px rgba(182, 138, 69, 0.5),
+        0 20px 50px rgba(0, 0, 0, 0.7);
+    background-color: #000;
+}
+
+.splash-video-frame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.splash-bottom {
+    text-align: center;
+    width: 100%;
+}
+
+.btn-entrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: var(--vino-tierra);
+    color: var(--marfil-sendero);
+    border: 2px solid var(--oro-terrenal);
+    padding: 18px 35px;
+    border-radius: 8px;
+    font-family: var(--font-textos);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 8px 25px rgba(116, 31, 44, 0.5),
+        0 0 0 0 rgba(182, 138, 69, 0.7);
+    animation: pulseBtn 2.5s infinite;
+    -webkit-tap-highlight-color: transparent;
+    width: 100%;
+    max-width: 320px;
+}
+
+.btn-entrar:hover {
+    background-color: var(--oro-terrenal);
+    color: var(--carbon-bosque);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 12px 35px rgba(182, 138, 69, 0.6),
+        0 0 0 10px rgba(182, 138, 69, 0);
+}
+
+.btn-entrar svg {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes pulseBtn {
+    0%, 100% {
+        box-shadow: 
+            0 8px 25px rgba(116, 31, 44, 0.5),
+            0 0 0 0 rgba(182, 138, 69, 0.7);
+    }
+    50% {
+        box-shadow: 
+            0 8px 25px rgba(116, 31, 44, 0.5),
+            0 0 0 15px rgba(182, 138, 69, 0);
+    }
+}
+
+.splash-tagline {
+    font-family: var(--font-titulos);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--marfil-sendero);
+    opacity: 0.85;
+    margin-top: 18px;
+    line-height: 1.4;
+}
+
+.contenido-principal {
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+.contenido-principal.oculto {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+body.splash-active {
+    overflow: hidden;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+}
+
+/* =========================================
    HERO
    ========================================= */
 .hero {
@@ -2179,6 +2377,30 @@ footer {
    RESPONSIVE
    ========================================= */
 @media (max-width: 767px) {
+    .splash-brand {
+        font-size: 2.3rem;
+        letter-spacing: 4px;
+    }
+    
+    .splash-descriptor {
+        font-size: 0.6rem;
+        letter-spacing: 4px;
+    }
+    
+    .splash-video-frame {
+        max-width: 280px;
+    }
+    
+    .btn-entrar {
+        padding: 16px 30px;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+    
+    .splash-tagline {
+        font-size: 0.85rem;
+    }
+
     .hero {
         min-height: calc(var(--vh, 1vh) * 100);
         height: calc(var(--vh, 1vh) * 100);
@@ -2187,7 +2409,6 @@ footer {
 
     .hero-content { max-height: none; }
     .logo-oficial { max-width: 220px; }
-    .brand-logo { font-size: 2.8rem; }
     .distances { font-size: 2.2rem; margin-bottom: 20px; }
     .countdown { gap: 10px; padding: 15px 0; margin-bottom: 20px; }
     .countdown-number { font-size: 2rem; }
@@ -2280,7 +2501,6 @@ footer {
         font-size: 0.75rem;
     }
 
-    /* Clubes responsive */
     .clubes-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 15px; 
@@ -2310,7 +2530,6 @@ footer {
             inset 0 0 30px rgba(182, 138, 69, 0.25);
     }
 
-    /* Patrocinadores responsive */
     .sponsors-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
@@ -2334,6 +2553,20 @@ footer {
     }
 
     footer { padding: 40px 20px 100px; }
+}
+
+@media (max-width: 380px) {
+    .splash-content {
+        gap: 18px;
+    }
+    
+    .splash-video-frame {
+        max-width: 240px;
+    }
+    
+    .splash-brand {
+        font-size: 2rem;
+    }
 }
 
 @media (min-width: 768px) {

@@ -14,6 +14,35 @@ window.addEventListener('orientationchange', setVH);
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🌿 Sistema HUELLAS iniciado correctamente.');
 
+    // =========================================
+    // PANTALLA DE BIENVENIDA (SPLASH SCREEN)
+    // =========================================
+    const splashScreen = document.getElementById('splashScreen');
+    const btnEntrar = document.getElementById('btnEntrar');
+    const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+
+    // Bloquear scroll mientras splash está visible
+    document.body.classList.add('splash-active');
+
+    if (btnEntrar) {
+        btnEntrar.addEventListener('click', () => {
+            // Ocultar splash
+            splashScreen.classList.add('fade-out');
+            contenidoPrincipal.classList.remove('oculto');
+            document.body.classList.remove('splash-active');
+            
+            // Permitir scroll
+            window.scrollTo(0, 0);
+            
+            // Remover splash después de la animación
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+            }, 700);
+            
+            console.log('✅ Usuario entró a la página');
+        });
+    }
+
     const NUMERO_WHATSAPP = '18492205138';
     const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbx84D_EGPmmvoWuVzutUiUQZYlXAD9nMNsfxFJFP-6ldtgavgDzkgJfNaQBM73ivWW0LQ/exec';
 
@@ -40,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let cedulaValida = false;
     let timeoutValidacion = null;
 
-    // Crear elemento de feedback si no existe
     let feedbackCedula = document.getElementById('feedback-cedula');
     if (!feedbackCedula && inputCedula) {
         feedbackCedula = document.createElement('div');
@@ -58,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Mostrar "Verificando..."
         feedbackCedula.textContent = '⏳ Verificando...';
         feedbackCedula.className = 'feedback-cedula verificando';
 
@@ -67,14 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.status === 'success') {
                     if (data.existe) {
-                        // Cédula duplicada
                         feedbackCedula.textContent = '❌ Esta cédula ya está registrada. Si necesitas modificar algo, contáctanos por WhatsApp.';
                         feedbackCedula.className = 'feedback-cedula error';
                         inputCedula.classList.add('input-error');
                         inputCedula.classList.remove('input-success');
                         cedulaValida = false;
                     } else {
-                        // Cédula disponible
                         feedbackCedula.textContent = '✓ Cédula disponible';
                         feedbackCedula.className = 'feedback-cedula exito';
                         inputCedula.classList.add('input-success');
@@ -84,12 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     feedbackCedula.textContent = '';
                     feedbackCedula.className = 'feedback-cedula';
-                    cedulaValida = true; // Permitir continuar si hay error en el servidor
+                    cedulaValida = true;
                 }
             })
             .catch(error => {
                 console.error('Error al verificar cédula:', error);
-                // Si falla la verificación, permitimos continuar (para no bloquear)
                 feedbackCedula.textContent = '';
                 feedbackCedula.className = 'feedback-cedula';
                 cedulaValida = true;
@@ -100,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         inputCedula.addEventListener('input', (e) => {
             const cedula = e.target.value.trim();
             
-            // Debounce: esperar 800ms después de que el usuario deje de escribir
             clearTimeout(timeoutValidacion);
             timeoutValidacion = setTimeout(() => {
                 verificarCedula(cedula);
@@ -278,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // ⚡ VALIDACIÓN: si la cédula ya está registrada, bloquear
             if (cedulaValida === false) {
                 alert('❌ Esta cédula ya está registrada. Si necesitas modificar algo, contáctanos por WhatsApp.');
                 inputCedula.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -311,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSubmit.disabled = true;
 
             try {
-                const response = await fetch(URL_GOOGLE_SCRIPT, {
+                await fetch(URL_GOOGLE_SCRIPT, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -325,7 +347,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSubmit.innerHTML = textoOriginal;
             btnSubmit.disabled = false;
 
-            // Calcular montos
             const precioInscripcion = datosInscripcion.distancia === '10K' ? PRECIO_10K : PRECIO_5K;
             const precioTransporte = usaTransporte ? PRECIO_TRANSPORTE : 0;
             const total = precioInscripcion + precioTransporte;
