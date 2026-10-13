@@ -2,6 +2,7 @@
    HUELLAS HACIENDA TRAIL RUN - SCRIPT
    ========================================= */
 
+// ⚡ Calcular altura real del viewport (evita el "temblor" en iOS)
 function setVH() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -19,22 +20,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const splashScreen = document.getElementById('splashScreen');
     const btnEntrar = document.getElementById('btnEntrar');
     const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+    const splashVideo = document.getElementById('splashVideo');
 
+    // Bloquear scroll mientras splash está visible
     document.body.classList.add('splash-active');
 
     if (btnEntrar) {
         btnEntrar.addEventListener('click', () => {
+            // 🛑 DETENER EL VIDEO para ahorrar datos
+            if (splashVideo) {
+                splashVideo.src = 'about:blank';
+            }
+            
+            // Ocultar splash
             splashScreen.classList.add('fade-out');
             contenidoPrincipal.classList.remove('oculto');
             document.body.classList.remove('splash-active');
             
+            // Permitir scroll
             window.scrollTo(0, 0);
             
+            // Remover splash después de la animación
             setTimeout(() => {
                 splashScreen.style.display = 'none';
             }, 700);
             
-            console.log('✅ Usuario entró a la página');
+            console.log('✅ Usuario entró a la página. Video detenido.');
         });
     }
 
@@ -45,15 +56,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const PRECIO_10K = 1800;
     const PRECIO_TRANSPORTE = 350;
 
-    const CLUBES_EXTRA = [];
+    // =========================================
+    // SELECCIÓN DE CLUB (antes del formulario)
+    // =========================================
+    let clubSeleccionado = null;
+    
+    const seccionSeleccionClub = document.getElementById('seleccionClub');
+    const seccionFormulario = document.getElementById('formulario');
+    const clubSeleccionadoNombre = document.getElementById('clubSeleccionadoNombre');
+    const btnCambiarClub = document.getElementById('btnCambiarClub');
 
-    const selectClub = document.getElementById('club');
-    if (selectClub && CLUBES_EXTRA.length > 0) {
-        CLUBES_EXTRA.forEach(club => {
-            const option = document.createElement('option');
-            option.value = club;
-            option.textContent = club;
-            selectClub.appendChild(option);
+    // Click en cualquier club card
+    document.querySelectorAll('.club-card[data-club]').forEach(card => {
+        card.addEventListener('click', () => {
+            clubSeleccionado = card.dataset.club;
+            console.log('🤝 Club seleccionado:', clubSeleccionado);
+            
+            // Mostrar el club en el formulario
+            if (clubSeleccionadoNombre) {
+                clubSeleccionadoNombre.textContent = clubSeleccionado;
+            }
+            
+            // Ocultar sección de selección y mostrar formulario
+            seccionSeleccionClub.classList.add('hidden-section');
+            seccionFormulario.classList.remove('hidden-section');
+            
+            // Scroll al formulario
+            setTimeout(() => {
+                seccionFormulario.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        });
+    });
+
+    // Botón "CAMBIAR" en el formulario
+    if (btnCambiarClub) {
+        btnCambiarClub.addEventListener('click', () => {
+            seccionFormulario.classList.add('hidden-section');
+            seccionSeleccionClub.classList.remove('hidden-section');
+            setTimeout(() => {
+                seccionSeleccionClub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
         });
     }
 
@@ -264,9 +306,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.btn-card').forEach(btn => {
         btn.addEventListener('click', () => {
             const distancia = btn.dataset.distancia;
-            const formulario = document.getElementById('formulario');
             
-            formulario.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Si no hay club seleccionado, llevar a la sección de selección
+            if (!clubSeleccionado) {
+                seccionSeleccionClub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            
+            // Si ya hay club, ir al formulario y marcar distancia
+            seccionFormulario.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
             setTimeout(() => {
                 const radioDistancia = document.querySelector(`input[name="distancia"][value="${distancia}"]`);
@@ -279,7 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. FORMULARIO DE INSCRIPCIÓN
     // =========================================
     const form = document.getElementById('inscripcionForm');
-    const seccionFormulario = document.getElementById('formulario');
     const seccionPago = document.getElementById('pago');
     const pagoResumen = document.getElementById('pagoResumen');
     const btnEnviarComprobante = document.getElementById('btnEnviarComprobante');
@@ -290,6 +337,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            if (!clubSeleccionado) {
+                alert('⚠️ Por favor selecciona tu club o comunidad aliada.');
+                seccionSeleccionClub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
 
             if (!form.checkValidity()) {
                 form.reportValidity();
@@ -314,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 email: formData.get('email'),
                 distancia: formData.get('distancia'),
                 talla: formData.get('talla'),
-                club: formData.get('club') || 'Ninguno',
+                club: clubSeleccionado,
                 transporte: usaTransporte ? 'Sí (desde la Basílica)' : 'No',
                 emergenciaNombre: formData.get('emergencia-nombre'),
                 emergenciaTelefono: formData.get('emergencia-telefono'),

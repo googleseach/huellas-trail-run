@@ -27,10 +27,10 @@
             </div>
 
             <div class="splash-video-wrapper">
-                <div class="splash-video-frame">
+                <div class="splash-video-frame" id="videoFrame">
                     <iframe 
                         id="splashVideo"
-                        src="https://www.youtube.com/embed/fQpTerBRePE?rel=0&modestbranding=1&playsinline=1&autoplay=1&mute=1&loop=1&playlist=fQpTerBRePE"
+                        src="https://www.youtube.com/embed/fQpTerBRePE?rel=0&modestbranding=1&playsinline=1&autoplay=0"
                         title="HUELLAS Hacienda Trail Run - Video Oficial"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -226,16 +226,33 @@
         </section>
 
         <!-- =========================================
-             SECCIÓN 5: CLUBES Y COMUNIDADES ALIADAS
+             SECCIÓN 5: ELIGE TU COMUNIDAD (NUEVO FLUJO)
              ========================================= -->
-        <section class="clubes">
+        <section id="seleccionClub" class="seleccion-club">
             <div class="container">
-                <p class="clubes-intro">JUNTOS DEJAMOS MÁS HUELLA</p>
-                <h2 class="section-title light">CLUBES Y COMUNIDADES ALIADAS</h2>
-                <p class="section-subtitle">Organizaciones que se suman a este camino y que forman parte del movimiento HUELLAS.</p>
+                <p class="clubes-intro">PRIMER PASO</p>
+                <h2 class="section-title light">¿PERTENECES A UN CLUB?</h2>
+                <p class="section-subtitle">Selecciona tu club o comunidad aliada para continuar con tu inscripción.</p>
 
-                <div class="clubes-grid">
-                    <div class="club-card">
+                <!-- Banner grande: No pertenezco a ningún club -->
+                <a href="https://www.sdctickets.do/form/549" target="_blank" rel="noopener" class="banner-no-club">
+                    <div class="banner-no-club-icon">🏃‍♂️</div>
+                    <div class="banner-no-club-texto">
+                        <span class="banner-no-club-titulo">NO PERTENEZCO A NINGÚN CLUB</span>
+                        <span class="banner-no-club-sub">Inscríbete de forma individual aquí</span>
+                    </div>
+                    <div class="banner-no-club-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <p class="seleccion-club-label">— O SELECCIONA TU CLUB ALIADO —</p>
+
+                <div class="clubes-grid" id="clubesGrid">
+                    <div class="club-card" data-club="Disciplina con Alma">
                         <div class="club-logo">
                             <img src="assets/img/clubes/disciplina-con-alma.png" alt="Disciplina con Alma">
                         </div>
@@ -243,7 +260,7 @@
                         <p>Comunidad</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Team J.S.F.">
                         <div class="club-logo">
                             <img src="assets/img/clubes/team-jsf.png" alt="Team J.S.F.">
                         </div>
@@ -251,7 +268,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Wao VFit Running Club">
                         <div class="club-logo">
                             <img src="assets/img/clubes/wao-vfit-running-club.png" alt="Wao VFit Running Club">
                         </div>
@@ -259,7 +276,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Point Runners Team">
                         <div class="club-logo">
                             <img src="assets/img/clubes/point-runners-team.png" alt="Point Runners Team">
                         </div>
@@ -267,7 +284,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="RF Experience">
                         <div class="club-logo">
                             <img src="assets/img/clubes/rf-experience.png" alt="RF Experience">
                         </div>
@@ -275,7 +292,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Richard Coach">
                         <div class="club-logo">
                             <img src="assets/img/clubes/richard-coach.png" alt="Richard Coach">
                         </div>
@@ -283,7 +300,7 @@
                         <p>Coach</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Áurea Experience">
                         <div class="club-logo">
                             <img src="assets/img/clubes/aurea-experience.png" alt="Áurea Experience">
                         </div>
@@ -291,7 +308,7 @@
                         <p>Comunidad</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="CF26 Running Aventureras">
                         <div class="club-logo">
                             <img src="assets/img/clubes/cf-running.png" alt="CF26 Running Aventureras">
                         </div>
@@ -299,7 +316,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Motivación by Nallelyfit">
                         <div class="club-logo">
                             <img src="assets/img/clubes/motivacion-by-nallelyfit.png" alt="Motivación by Nallelyfit">
                         </div>
@@ -307,7 +324,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Los Runners de La Ceiba">
                         <div class="club-logo">
                             <img src="assets/img/clubes/los-runners-de-la-ceiba.png" alt="Los Runners de La Ceiba">
                         </div>
@@ -315,7 +332,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Higüey Runners Club">
                         <div class="club-logo">
                             <img src="assets/img/clubes/higuey-runners-club.png" alt="Higüey Runners Club">
                         </div>
@@ -323,7 +340,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Cazadores del Amanecer">
                         <div class="club-logo">
                             <img src="assets/img/clubes/cazadores-del-amanecer.png" alt="Cazadores del Amanecer">
                         </div>
@@ -331,7 +348,7 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="Team JP Runner">
                         <div class="club-logo">
                             <img src="assets/img/clubes/team-jp-runner.png" alt="Team JP Runner">
                         </div>
@@ -339,11 +356,19 @@
                         <p>Club</p>
                     </div>
 
-                    <div class="club-card">
+                    <div class="club-card" data-club="RRC Club">
                         <div class="club-logo">
                             <img src="assets/img/clubes/rrc-club.png" alt="RRC Club">
                         </div>
                         <h3>RRC Club</h3>
+                        <p>Club</p>
+                    </div>
+
+                    <div class="club-card" data-club="Kairos Hybrid Club">
+                        <div class="club-logo">
+                            <img src="assets/img/clubes/kairos-hybrid-club.png" alt="Kairos Hybrid Club">
+                        </div>
+                        <h3>Kairos Hybrid Club</h3>
                         <p>Club</p>
                     </div>
                 </div>
@@ -533,7 +558,7 @@
         <!-- =========================================
              SECCIÓN 9: FORMULARIO DE INSCRIPCIÓN
              ========================================= -->
-        <section id="formulario" class="formulario">
+        <section id="formulario" class="formulario hidden-section">
             <div class="container">
                 <div class="form-intro">
                     <span class="form-leaf">🌿</span>
@@ -543,6 +568,17 @@
                 </div>
 
                 <form id="inscripcionForm" class="inscripcion-form" novalidate>
+                    
+                    <!-- Club seleccionado (solo lectura) -->
+                    <div class="form-field form-club-seleccionado">
+                        <label>Club / Comunidad</label>
+                        <div class="club-seleccionado-box">
+                            <span class="club-seleccionado-icono">🤝</span>
+                            <span id="clubSeleccionadoNombre" class="club-seleccionado-nombre">—</span>
+                            <button type="button" id="btnCambiarClub" class="btn-cambiar-club">CAMBIAR</button>
+                        </div>
+                    </div>
+
                     <div class="form-field">
                         <label for="nombre">Nombre completo *</label>
                         <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez">
@@ -591,28 +627,6 @@
                             <label class="radio-option"><input type="radio" name="talla" value="M" required><span class="radio-box">M</span></label>
                             <label class="radio-option"><input type="radio" name="talla" value="L" required><span class="radio-box">L</span></label>
                         </div>
-                    </div>
-
-                    <div class="form-field">
-                        <label for="club">Club o Comunidad Aliada</label>
-                        <select id="club" name="club" class="form-select">
-                            <option value="">— Selecciona tu club o comunidad —</option>
-                            <option value="Ninguno">No pertenezco a ningún club</option>
-                            <option value="Disciplina con Alma">Disciplina con Alma (Comunidad)</option>
-                            <option value="Team J.S.F.">Team J.S.F. (Club)</option>
-                            <option value="Wao VFit Running Club">Wao VFit Running Club (Club)</option>
-                            <option value="Point Runners Team">Point Runners Team (Club)</option>
-                            <option value="RF Experience">RF Experience (Club)</option>
-                            <option value="Richard Coach">Richard Coach (Coach)</option>
-                            <option value="Áurea Experience">Áurea Experience (Comunidad)</option>
-                            <option value="CF26 Running Aventureras">CF26 Running Aventureras (Club)</option>
-                            <option value="Motivación by Nallelyfit">Motivación by Nallelyfit (Club)</option>
-                            <option value="Los Runners de La Ceiba">Los Runners de La Ceiba (Club)</option>
-                            <option value="Higüey Runners Club">Higüey Runners Club (Club)</option>
-                            <option value="Cazadores del Amanecer">Cazadores del Amanecer (Club)</option>
-                            <option value="Team JP Runner">Team JP Runner (Club)</option>
-                            <option value="RRC Club">RRC Club (Club)</option>
-                        </select>
                     </div>
 
                     <div class="form-field form-transporte">
@@ -695,11 +709,11 @@
                         </div>
                         <div class="cuenta-info">
                             <p class="cuenta-label">Cuenta de Ahorro</p>
-                            <p class="cuenta-numero">801189572</p>
+                            <p class="cuenta-numero">860289578</p>
                             <p class="cuenta-titular-label">Titular</p>
                             <p class="cuenta-titular">Melissa García Durán</p>
                         </div>
-                        <button class="btn-copiar" data-copiar="801189572">
+                        <button class="btn-copiar" data-copiar="860289578">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>

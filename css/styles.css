@@ -2374,6 +2374,213 @@ footer {
 }
 
 /* =========================================
+   NUEVOS ESTILOS - SELECCIÓN DE CLUB
+   ========================================= */
+
+.seleccion-club {
+    background: linear-gradient(180deg, var(--tierra-profunda) 0%, #3A2619 100%);
+    padding: 100px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.seleccion-club::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(182, 138, 69, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(182, 138, 69, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.seleccion-club .container { position: relative; z-index: 1; }
+
+.banner-no-club {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    padding: 30px 35px;
+    background: linear-gradient(135deg, var(--vino-tierra) 0%, #5A1622 100%);
+    border: 2px solid var(--oro-terrenal);
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--marfil-sendero);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 
+        0 15px 40px rgba(116, 31, 44, 0.5),
+        0 0 0 0 rgba(182, 138, 69, 0.7);
+    animation: pulseBanner 2.5s infinite;
+    text-align: left;
+}
+
+.banner-no-club:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+        0 25px 55px rgba(116, 31, 44, 0.7),
+        0 0 0 15px rgba(182, 138, 69, 0);
+    background: linear-gradient(135deg, var(--oro-terrenal) 0%, #9A7438 100%);
+    color: var(--carbon-bosque);
+}
+
+.banner-no-club:hover .banner-no-club-sub {
+    color: var(--carbon-bosque);
+    opacity: 0.9;
+}
+
+.banner-no-club:hover .banner-no-club-arrow {
+    background-color: var(--carbon-bosque);
+    color: var(--oro-terrenal);
+}
+
+@keyframes pulseBanner {
+    0%, 100% {
+        box-shadow: 
+            0 15px 40px rgba(116, 31, 44, 0.5),
+            0 0 0 0 rgba(182, 138, 69, 0.7);
+    }
+    50% {
+        box-shadow: 
+            0 15px 40px rgba(116, 31, 44, 0.5),
+            0 0 0 18px rgba(182, 138, 69, 0);
+    }
+}
+
+.banner-no-club-icon {
+    font-size: 3.5rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.banner-no-club-texto {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.banner-no-club-titulo {
+    font-family: var(--font-titulos);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.banner-no-club-sub {
+    font-size: 0.85rem;
+    color: var(--marfil-sendero);
+    opacity: 0.85;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.banner-no-club-arrow {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(182, 138, 69, 0.3);
+    border: 2px solid var(--oro-terrenal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    color: var(--marfil-sendero);
+}
+
+.banner-no-club:hover .banner-no-club-arrow {
+    transform: translateX(5px);
+}
+
+.banner-no-club-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+.seleccion-club-label {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--oro-terrenal);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 40px 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.seleccion-club-label::before,
+.seleccion-club-label::after {
+    content: '';
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, var(--oro-terrenal), transparent);
+}
+
+.form-club-seleccionado { margin-bottom: 30px; }
+
+.club-seleccionado-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, rgba(22, 58, 42, 0.08) 0%, rgba(182, 138, 69, 0.08) 100%);
+    border: 2px solid var(--oro-terrenal);
+    border-radius: 10px;
+}
+
+.club-seleccionado-icono {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.club-seleccionado-nombre {
+    flex: 1;
+    font-family: var(--font-titulos);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--verde-huella);
+    letter-spacing: 1px;
+}
+
+.btn-cambiar-club {
+    background-color: transparent;
+    border: 1px solid var(--vino-tierra);
+    color: var(--vino-tierra);
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-family: var(--font-textos);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-cambiar-club:hover {
+    background-color: var(--vino-tierra);
+    color: var(--marfil-sendero);
+}
+
+.club-card[data-club] {
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+}
+
+.club-card[data-club]:hover {
+    transform: translateY(-5px);
+}
+
+/* =========================================
    RESPONSIVE
    ========================================= */
 @media (max-width: 767px) {
@@ -2553,6 +2760,61 @@ footer {
     }
 
     footer { padding: 40px 20px 100px; }
+    
+    /* Banner no club responsive */
+    .banner-no-club {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+        gap: 15px;
+    }
+    
+    .banner-no-club-icon {
+        font-size: 2.8rem;
+    }
+    
+    .banner-no-club-titulo {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+    
+    .banner-no-club-sub {
+        font-size: 0.75rem;
+    }
+    
+    .banner-no-club-arrow {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .banner-no-club-arrow svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .seleccion-club-label {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+    }
+    
+    .seleccion-club-label::before,
+    .seleccion-club-label::after {
+        width: 30px;
+    }
+    
+    .club-seleccionado-box {
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    .club-seleccionado-nombre {
+        font-size: 1rem;
+    }
+    
+    .btn-cambiar-club {
+        padding: 6px 12px;
+        font-size: 0.65rem;
+    }
 }
 
 @media (max-width: 380px) {
