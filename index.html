@@ -226,7 +226,7 @@
         </section>
 
         <!-- =========================================
-             SECCIÓN 5: ELIGE TU COMUNIDAD (NUEVO FLUJO)
+             SECCIÓN 5: ELIGE TU COMUNIDAD
              ========================================= -->
         <section id="seleccionClub" class="seleccion-club">
             <div class="container">
@@ -234,7 +234,6 @@
                 <h2 class="section-title light">¿PERTENECES A UN CLUB?</h2>
                 <p class="section-subtitle">Selecciona tu club o comunidad aliada para continuar con tu inscripción.</p>
 
-                <!-- Banner grande: No pertenezco a ningún club -->
                 <a href="https://www.sdctickets.do/form/549" target="_blank" rel="noopener" class="banner-no-club">
                     <div class="banner-no-club-icon">🏃‍♂️</div>
                     <div class="banner-no-club-texto">
@@ -571,10 +570,18 @@
                     
                     <!-- Club seleccionado (solo lectura) -->
                     <div class="form-field form-club-seleccionado">
-                        <label>Club / Comunidad</label>
+                        <label>Yo Soy:</label>
                         <div class="club-seleccionado-box">
-                            <span class="club-seleccionado-icono">🤝</span>
-                            <span id="clubSeleccionadoNombre" class="club-seleccionado-nombre">—</span>
+                            <div class="club-seleccionado-logo-wrap">
+                                <img id="clubSeleccionadoLogo" 
+                                     src="" 
+                                     alt="Logo del club" 
+                                     class="club-seleccionado-logo">
+                            </div>
+                            <div class="club-seleccionado-info">
+                                <span id="clubSeleccionadoNombre" class="club-seleccionado-nombre">—</span>
+                                <span class="club-seleccionado-tipo">Club Aliado</span>
+                            </div>
                             <button type="button" id="btnCambiarClub" class="btn-cambiar-club">CAMBIAR</button>
                         </div>
                     </div>

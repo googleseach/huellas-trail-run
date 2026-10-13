@@ -2374,9 +2374,8 @@ footer {
 }
 
 /* =========================================
-   NUEVOS ESTILOS - SELECCIÓN DE CLUB
+   SELECCIÓN DE CLUB
    ========================================= */
-
 .seleccion-club {
     background: linear-gradient(180deg, var(--tierra-profunda) 0%, #3A2619 100%);
     padding: 100px 20px;
@@ -2524,37 +2523,106 @@ footer {
     background: linear-gradient(90deg, transparent, var(--oro-terrenal), transparent);
 }
 
+/* =========================================
+   CLUB SELECCIONADO (con logo)
+   ========================================= */
 .form-club-seleccionado { margin-bottom: 30px; }
 
 .club-seleccionado-box {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 18px 20px;
+    gap: 18px;
+    padding: 20px;
     background: linear-gradient(135deg, rgba(22, 58, 42, 0.08) 0%, rgba(182, 138, 69, 0.08) 100%);
     border: 2px solid var(--oro-terrenal);
-    border-radius: 10px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
 }
 
-.club-seleccionado-icono {
-    font-size: 1.8rem;
+.club-seleccionado-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--oro-terrenal), var(--vino-tierra));
+}
+
+.club-seleccionado-logo-wrap {
     flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(74, 51, 38, 0.9) 0%, rgba(24, 32, 27, 0.95) 100%);
+    border: 3px solid var(--oro-terrenal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px;
+    box-shadow: 
+        0 0 0 4px rgba(182, 138, 69, 0.2),
+        0 0 15px rgba(182, 138, 69, 0.3),
+        0 6px 18px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.club-seleccionado-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+    transition: filter 0.3s ease;
+}
+
+.club-seleccionado-box:hover .club-seleccionado-logo-wrap {
+    border-color: #D4A55E;
+    box-shadow: 
+        0 0 0 6px rgba(182, 138, 69, 0.3),
+        0 0 25px rgba(182, 138, 69, 0.5),
+        0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.club-seleccionado-box:hover .club-seleccionado-logo {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.club-seleccionado-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
 }
 
 .club-seleccionado-nombre {
-    flex: 1;
     font-family: var(--font-titulos);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--verde-huella);
     letter-spacing: 1px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.club-seleccionado-tipo {
+    font-family: var(--font-textos);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--oro-terrenal);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.9;
 }
 
 .btn-cambiar-club {
+    flex-shrink: 0;
     background-color: transparent;
     border: 1px solid var(--vino-tierra);
     color: var(--vino-tierra);
-    padding: 8px 16px;
+    padding: 10px 16px;
     border-radius: 5px;
     font-family: var(--font-textos);
     font-size: 0.7rem;
@@ -2564,11 +2632,23 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     -webkit-tap-highlight-color: transparent;
+    align-self: center;
 }
 
 .btn-cambiar-club:hover {
     background-color: var(--vino-tierra);
     color: var(--marfil-sendero);
+}
+
+.form-club-seleccionado > label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--vino-tierra);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-family: var(--font-titulos);
 }
 
 .club-card[data-club] {
@@ -2761,7 +2841,6 @@ footer {
 
     footer { padding: 40px 20px 100px; }
     
-    /* Banner no club responsive */
     .banner-no-club {
         flex-direction: column;
         text-align: center;
@@ -2801,18 +2880,35 @@ footer {
     .seleccion-club-label::after {
         width: 30px;
     }
-    
+
     .club-seleccionado-box {
         padding: 15px;
-        gap: 10px;
+        gap: 12px;
+        flex-wrap: wrap;
     }
-    
+
+    .club-seleccionado-logo-wrap {
+        width: 60px;
+        height: 60px;
+        padding: 8px;
+        border-width: 2px;
+        box-shadow: 
+            0 0 0 3px rgba(182, 138, 69, 0.2),
+            0 0 10px rgba(182, 138, 69, 0.3),
+            0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
     .club-seleccionado-nombre {
         font-size: 1rem;
     }
-    
+
+    .club-seleccionado-tipo {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+    }
+
     .btn-cambiar-club {
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 0.65rem;
     }
 }

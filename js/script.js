@@ -22,25 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const contenidoPrincipal = document.getElementById('contenidoPrincipal');
     const splashVideo = document.getElementById('splashVideo');
 
-    // Bloquear scroll mientras splash está visible
     document.body.classList.add('splash-active');
 
     if (btnEntrar) {
         btnEntrar.addEventListener('click', () => {
-            // 🛑 DETENER EL VIDEO para ahorrar datos
             if (splashVideo) {
                 splashVideo.src = 'about:blank';
             }
             
-            // Ocultar splash
             splashScreen.classList.add('fade-out');
             contenidoPrincipal.classList.remove('oculto');
             document.body.classList.remove('splash-active');
             
-            // Permitir scroll
             window.scrollTo(0, 0);
             
-            // Remover splash después de la animación
             setTimeout(() => {
                 splashScreen.style.display = 'none';
             }, 700);
@@ -64,24 +59,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const seccionSeleccionClub = document.getElementById('seleccionClub');
     const seccionFormulario = document.getElementById('formulario');
     const clubSeleccionadoNombre = document.getElementById('clubSeleccionadoNombre');
+    const clubSeleccionadoLogo = document.getElementById('clubSeleccionadoLogo');
     const btnCambiarClub = document.getElementById('btnCambiarClub');
 
     // Click en cualquier club card
     document.querySelectorAll('.club-card[data-club]').forEach(card => {
         card.addEventListener('click', () => {
             clubSeleccionado = card.dataset.club;
-            console.log('🤝 Club seleccionado:', clubSeleccionado);
             
-            // Mostrar el club en el formulario
+            const imgLogo = card.querySelector('.club-logo img');
+            const logoSrc = imgLogo ? imgLogo.getAttribute('src') : '';
+            
+            console.log('🤝 Club seleccionado:', clubSeleccionado);
+            console.log('🖼️ Logo:', logoSrc);
+            
             if (clubSeleccionadoNombre) {
                 clubSeleccionadoNombre.textContent = clubSeleccionado;
             }
+            if (clubSeleccionadoLogo && logoSrc) {
+                clubSeleccionadoLogo.src = logoSrc;
+                clubSeleccionadoLogo.alt = 'Logo de ' + clubSeleccionado;
+            }
             
-            // Ocultar sección de selección y mostrar formulario
             seccionSeleccionClub.classList.add('hidden-section');
             seccionFormulario.classList.remove('hidden-section');
             
-            // Scroll al formulario
             setTimeout(() => {
                 seccionFormulario.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
@@ -307,13 +309,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const distancia = btn.dataset.distancia;
             
-            // Si no hay club seleccionado, llevar a la sección de selección
             if (!clubSeleccionado) {
                 seccionSeleccionClub.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 return;
             }
             
-            // Si ya hay club, ir al formulario y marcar distancia
             seccionFormulario.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
             setTimeout(() => {
