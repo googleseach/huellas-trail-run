@@ -2852,7 +2852,6 @@ footer {
     .tagline { font-size: 1rem; padding: 12px 15px; }
     .btn-primary { padding: 15px 30px; font-size: 0.9rem; margin-bottom: 20px; }
 
-    /* Patrocinador oficial responsive */
     .patrocinador-oficial {
         padding: 60px 20px;
     }
@@ -2877,7 +2876,6 @@ footer {
         letter-spacing: 2px;
     }
 
-    /* Marca de agua responsive */
     .patrocinador-watermark {
         bottom: 20px;
         left: 15px;
