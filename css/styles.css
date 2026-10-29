@@ -2280,9 +2280,9 @@ input.input-error {
 
 .sponsors-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-    max-width: 900px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
     margin: 0 auto 50px;
 }
 
@@ -2297,6 +2297,25 @@ input.input-error {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sponsor-principal {
+    grid-column: span 2;
+    padding: 40px 20px 35px;
+}
+
+.sponsor-principal .sponsor-logo {
+    width: 180px;
+    height: 180px;
+    padding: 25px;
+}
+
+.sponsor-principal h3 {
+    font-size: 2rem;
 }
 
 .sponsor-card::before {
@@ -3000,12 +3019,27 @@ footer {
         gap: 15px;
         max-width: 100%;
     }
+
+    .sponsor-principal {
+        grid-column: span 2;
+        padding: 25px 15px;
+    }
     
     .sponsor-logo {
         width: 110px;
         height: 110px;
         padding: 14px;
         border-width: 2px;
+    }
+
+    .sponsor-principal .sponsor-logo {
+        width: 130px;
+        height: 130px;
+        padding: 18px;
+    }
+
+    .sponsor-principal h3 {
+        font-size: 1.5rem;
     }
     
     .sponsor-card {
@@ -3114,7 +3148,7 @@ footer {
     .cards-container { flex-direction: row; max-width: 900px; justify-content: center; gap: 30px; }
     .card { flex: 1; max-width: 420px; }
     .clubes-grid { grid-template-columns: repeat(4, 1fr); max-width: 1200px; }
-    .sponsors-grid { grid-template-columns: repeat(4, 1fr); max-width: 1100px; }
+    .sponsors-grid { grid-template-columns: repeat(3, 1fr); max-width: 1000px; }
     .ruta-detalles { grid-template-columns: repeat(4, 1fr); }
     .pricing-footer { flex-direction: row; justify-content: center; gap: 40px; }
     .whatsapp-float { width: 65px; height: 65px; bottom: 30px; right: 30px; }
