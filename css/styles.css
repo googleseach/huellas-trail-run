@@ -414,100 +414,43 @@ body.splash-active {
 }
 
 /* =========================================
-   PATROCINADOR OFICIAL (SECCIÓN PROTAGONISTA)
+   BANNER PROMOCIONAL
    ========================================= */
-.patrocinador-oficial {
-    position: relative;
-    background: linear-gradient(135deg, var(--verde-huella) 0%, var(--carbon-bosque) 50%, var(--verde-huella) 100%);
-    padding: 100px 20px;
+.banner-promocional {
+    background-color: var(--carbon-bosque);
+    padding: 40px 20px;
     text-align: center;
+    position: relative;
     overflow: hidden;
     border-top: 2px solid var(--oro-terrenal);
     border-bottom: 2px solid var(--oro-terrenal);
 }
 
-.patrocinador-oficial-overlay {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image: 
-        radial-gradient(circle at 25% 30%, rgba(182, 138, 69, 0.18) 0%, transparent 45%),
-        radial-gradient(circle at 75% 70%, rgba(116, 31, 44, 0.18) 0%, transparent 45%);
-    pointer-events: none;
-}
-
-.patrocinador-oficial-content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
+.banner-promo-link {
+    display: block;
+    max-width: 1100px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    animation: patrocinadorFadeIn 1s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.6),
+        0 0 0 4px rgba(182, 138, 69, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@keyframes patrocinadorFadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+.banner-promo-link:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.8),
+        0 0 0 6px rgba(182, 138, 69, 0.4),
+        0 0 30px rgba(182, 138, 69, 0.3);
 }
 
-.patrocinador-oficial-label {
-    font-family: var(--font-textos);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 6px;
-    color: var(--oro-terrenal);
-    text-transform: uppercase;
-    padding: 8px 22px;
-    border: 1px solid rgba(182, 138, 69, 0.5);
-    border-radius: 30px;
-    background-color: rgba(182, 138, 69, 0.08);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.patrocinador-oficial-logo {
+.banner-promo-img {
     width: 100%;
-    max-width: 400px;
     height: auto;
-    filter: 
-        drop-shadow(0 0 2px rgba(244, 235, 221, 0.5))
-        drop-shadow(0 0 8px rgba(182, 138, 69, 0.6))
-        drop-shadow(0 0 20px rgba(182, 138, 69, 0.35))
-        drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6));
-    transition: transform 0.4s ease, filter 0.4s ease;
-}
-
-.patrocinador-oficial-logo:hover {
-    transform: scale(1.03);
-    filter: 
-        drop-shadow(0 0 3px rgba(244, 235, 221, 0.7))
-        drop-shadow(0 0 12px rgba(182, 138, 69, 0.8))
-        drop-shadow(0 0 30px rgba(182, 138, 69, 0.5))
-        drop-shadow(0 15px 40px rgba(0, 0, 0, 0.7));
-}
-
-.patrocinador-oficial-nombre {
-    font-family: var(--font-titulos);
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--marfil-sendero);
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    margin-top: 5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.patrocinador-oficial-sub {
-    font-family: var(--font-textos);
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--oro-terrenal);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.9;
+    display: block;
+    object-fit: cover;
 }
 
 /* =========================================
@@ -563,22 +506,16 @@ body.splash-active {
 }
 
 /* =========================================
-   MANIFIESTO
+   LA RUTA
    ========================================= */
-.manifesto {
-    background-color: var(--verde-huella);
-    padding: 80px 20px;
+.ruta {
+    background-color: var(--carbon-bosque);
+    padding: 80px 0;
     text-align: center;
+    overflow: hidden;
 }
 
-.manifesto-intro {
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    color: var(--oro-terrenal);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
+.ruta .container { padding: 0 20px; }
 
 .section-title {
     font-family: var(--font-titulos);
@@ -604,57 +541,6 @@ body.splash-active {
 }
 
 .section-subtitle.dark { color: var(--carbon-bosque); }
-
-.pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.pillar {
-    background-color: rgba(244, 235, 221, 0.05);
-    padding: 25px 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(182, 138, 69, 0.3);
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-.pillar:hover {
-    background-color: rgba(244, 235, 221, 0.1);
-    border-color: var(--oro-terrenal);
-}
-
-.pillar .icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
-
-.pillar h3 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--oro-terrenal);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
-
-.pillar p {
-    font-size: 0.8rem;
-    color: var(--marfil-sendero);
-    opacity: 0.8;
-    line-height: 1.4;
-}
-
-/* =========================================
-   LA RUTA
-   ========================================= */
-.ruta {
-    background-color: var(--carbon-bosque);
-    padding: 80px 0;
-    text-align: center;
-    overflow: hidden;
-}
-
-.ruta .container { padding: 0 20px; }
 
 .carrusel-wrapper {
     position: relative;
@@ -2300,7 +2186,7 @@ input.input-error {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto 50px;
 }
 
@@ -2852,28 +2738,11 @@ footer {
     .tagline { font-size: 1rem; padding: 12px 15px; }
     .btn-primary { padding: 15px 30px; font-size: 0.9rem; margin-bottom: 20px; }
 
-    .patrocinador-oficial {
-        padding: 60px 20px;
+    .banner-promocional {
+        padding: 25px 15px;
     }
-    
-    .patrocinador-oficial-label {
-        font-size: 0.65rem;
-        letter-spacing: 4px;
-        padding: 6px 16px;
-    }
-    
-    .patrocinador-oficial-logo {
-        max-width: 260px;
-    }
-    
-    .patrocinador-oficial-nombre {
-        font-size: 1.4rem;
-        letter-spacing: 3px;
-    }
-    
-    .patrocinador-oficial-sub {
-        font-size: 0.65rem;
-        letter-spacing: 2px;
+    .banner-promo-link {
+        border-radius: 10px;
     }
 
     .patrocinador-watermark {
@@ -3122,11 +2991,10 @@ footer {
 
 @media (min-width: 768px) {
     .logo-oficial { max-width: 420px; }
-    .pillars-grid { grid-template-columns: repeat(5, 1fr); max-width: 900px; }
     .cards-container { flex-direction: row; max-width: 900px; justify-content: center; gap: 30px; }
     .card { flex: 1; max-width: 420px; }
     .clubes-grid { grid-template-columns: repeat(4, 1fr); max-width: 1200px; }
-    .sponsors-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
+    .sponsors-grid { grid-template-columns: repeat(3, 1fr); max-width: 1000px; }
     .ruta-detalles { grid-template-columns: repeat(4, 1fr); }
     .pricing-footer { flex-direction: row; justify-content: center; gap: 40px; }
     .whatsapp-float { width: 65px; height: 65px; bottom: 30px; right: 30px; }
@@ -3145,10 +3013,6 @@ footer {
     .experiencia-grid {
         grid-template-columns: repeat(4, 1fr);
         max-width: 1000px;
-    }
-
-    .patrocinador-oficial-logo {
-        max-width: 500px;
     }
 
     .patrocinador-watermark {
