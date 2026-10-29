@@ -2401,6 +2401,33 @@ input.input-error {
     font-size: 2.2rem;
 }
 
+.sponsor-lema {
+    font-family: var(--font-textos);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--oro-terrenal);
+    text-transform: uppercase;
+    margin-top: 5px;
+    opacity: 0.9;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+    line-height: 1.4;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.sponsor-lema::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--oro-terrenal), transparent);
+}
+
 .btn-sponsor {
     display: inline-block;
     background-color: transparent;
@@ -3054,6 +3081,11 @@ footer {
     
     .sponsor-card h3 {
         font-size: 1.1rem;
+    }
+
+    .sponsor-lema {
+        font-size: 0.6rem;
+        letter-spacing: 1px;
     }
 
     footer { padding: 40px 20px 100px; }
