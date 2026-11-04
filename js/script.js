@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PRECIO_5K = 1600;
     const PRECIO_10K = 1800;
-    const PRECIO_TRANSPORTE = 350;
+    const PRECIO_TRANSPORTE = 0; // 🚌 Transporte GRATIS
 
     // =========================================
     // SELECCIÓN DE CLUB (antes del formulario)
@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 distancia: formData.get('distancia'),
                 talla: formData.get('talla'),
                 club: clubSeleccionado,
-                transporte: usaTransporte ? 'Sí (desde la Basílica)' : 'No',
+                transporte: usaTransporte ? 'Sí (Reservado desde la Basílica)' : 'No',
                 emergenciaNombre: formData.get('emergencia-nombre'),
                 emergenciaTelefono: formData.get('emergencia-telefono'),
                 condiciones: formData.get('condiciones') || 'Ninguna'
@@ -396,8 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSubmit.disabled = false;
 
             const precioInscripcion = datosInscripcion.distancia === '10K' ? PRECIO_10K : PRECIO_5K;
-            const precioTransporte = usaTransporte ? PRECIO_TRANSPORTE : 0;
-            const total = precioInscripcion + precioTransporte;
+            const total = precioInscripcion; // El transporte ya no suma costo
             
             const formatoRD = (num) => 'RD$ ' + num.toLocaleString('es-DO');
 
@@ -414,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 resumenHTML += `
                     <div class="resumen-linea">
                         <span class="resumen-concepto">Transporte desde la Basílica</span>
-                        <span class="resumen-monto">${formatoRD(precioTransporte)}</span>
+                        <span class="resumen-monto">¡GRATIS! (Cupo Reservado)</span>
                     </div>
                 `;
             }
@@ -454,8 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const usaTransporte = datosInscripcion.transporte && datosInscripcion.transporte.includes('Sí');
             const precioInscripcion = datosInscripcion.distancia === '10K' ? PRECIO_10K : PRECIO_5K;
-            const precioTransporte = usaTransporte ? PRECIO_TRANSPORTE : 0;
-            const total = precioInscripcion + precioTransporte;
+            const total = precioInscripcion;
             
             const formatoRD = (num) => 'RD$ ' + num.toLocaleString('es-DO');
 
@@ -480,7 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
 🚌 *TRANSPORTE*
 • Servicio: Desde la Basílica de Higüey
 • Hora de salida: 6:00 AM
-• Costo: ${formatoRD(precioTransporte)}`;
+• Costo: ¡GRATIS! (Cupo reservado)`;
             }
 
             mensaje += `
