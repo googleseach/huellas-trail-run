@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PRECIO_5K = 1600;
     const PRECIO_10K = 1800;
-    const PRECIO_TRANSPORTE = 0; // 🚌 Transporte GRATIS
 
     // =========================================
     // SELECCIÓN DE CLUB (antes del formulario)
@@ -396,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSubmit.disabled = false;
 
             const precioInscripcion = datosInscripcion.distancia === '10K' ? PRECIO_10K : PRECIO_5K;
-            const total = precioInscripcion; // El transporte ya no suma costo
+            const total = precioInscripcion;
             
             const formatoRD = (num) => 'RD$ ' + num.toLocaleString('es-DO');
 
@@ -413,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 resumenHTML += `
                     <div class="resumen-linea">
                         <span class="resumen-concepto">Transporte desde la Basílica</span>
-                        <span class="resumen-monto">¡GRATIS! (Cupo Reservado)</span>
+                        <span class="resumen-monto"><span class="texto-gratis">¡GRATIS!</span> (Cupo Reservado)</span>
                     </div>
                 `;
             }

@@ -51,6 +51,21 @@ img { max-width: 100%; display: block; }
 .hidden-section { display: none; }
 
 /* =========================================
+   RESALTADO DE LA PALABRA GRATIS
+   ========================================= */
+.texto-gratis {
+    color: #2E7D32; /* Verde llamativo */
+    font-weight: 900;
+    font-size: 1.05em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: rgba(46, 125, 50, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* =========================================
    PANTALLA DE BIENVENIDA (SPLASH SCREEN)
    ========================================= */
 .splash-screen {
