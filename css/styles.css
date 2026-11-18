@@ -1442,7 +1442,7 @@ input.input-error {
 }
 
 /* =========================================
-   OPCIÓN DE TRANSPORTE
+   OPCIÓN DE TRANSPORTE Y PUNTOS DE SALIDA
    ========================================= */
 .form-transporte {
     margin-top: 25px;
@@ -1536,6 +1536,60 @@ input.input-error {
     color: var(--oro-terrenal);
     display: inline;
     font-size: 0.9rem;
+}
+
+/* --- NUEVO: Estilos de los puntos de salida --- */
+.opciones-transporte {
+    margin-top: 15px;
+    padding: 20px;
+    background-color: #FDFBF7;
+    border: 1px solid rgba(182, 138, 69, 0.4);
+    border-radius: 12px;
+    animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.opciones-transporte-title {
+    font-family: var(--font-textos);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--vino-tierra);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.radio-group-transporte {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-transporte {
+    display: block;
+    width: 100%;
+}
+
+.radio-transporte .radio-box {
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.radio-transporte input:checked + .radio-box {
+    background-color: var(--verde-huella);
+    color: var(--marfil-sendero);
+    border-color: var(--verde-huella);
+    box-shadow: 0 4px 12px rgba(22, 58, 42, 0.3);
 }
 
 /* =========================================
@@ -3028,6 +3082,15 @@ footer {
     
     .transporte-detalle {
         font-size: 0.75rem;
+    }
+
+    .opciones-transporte {
+        padding: 15px;
+    }
+    
+    .radio-transporte .radio-box {
+        padding: 12px 14px;
+        font-size: 0.8rem;
     }
 
     .feedback-cedula {

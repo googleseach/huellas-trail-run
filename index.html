@@ -193,12 +193,19 @@
                 <p class="section-subtitle">Juntos hacemos que más personas dejen huella.</p>
 
                 <div class="sponsors-grid">
-                    <!-- Patrocinador Principal (Abarca 2 columnas) -->
+                    <!-- Patrocinadores Principales (Abarcan 2 columnas cada uno) -->
                     <div class="sponsor-card sponsor-principal">
                         <div class="sponsor-logo">
                             <img src="assets/img/patrocinadores/mar-y-tierra.png" alt="Mar y Tierra">
                         </div>
                         <h3>Mar y Tierra</h3>
+                    </div>
+
+                    <div class="sponsor-card sponsor-principal">
+                        <div class="sponsor-logo">
+                            <img src="assets/img/patrocinadores/shellfish-del-caribe-srl.png" alt="Shellfish del Caribe SRL">
+                        </div>
+                        <h3>Shellfish del Caribe SRL</h3>
                     </div>
 
                     <!-- Patrocinadores Secundarios -->
@@ -433,7 +440,6 @@
                         <p>Club</p>
                     </div>
 
-                    <!-- NUEVO CLUB: SABANA DE LA MAR RUNNING -->
                     <div class="club-card" data-club="Sabana de la Mar Running">
                         <div class="club-logo">
                             <img src="assets/img/clubes/sabana-de-la-mar-running.png" alt="Sabana de la Mar Running">
@@ -706,19 +712,42 @@
                         </div>
                     </div>
 
-                    <!-- TRANSPORTE GRATUITO -->
+                    <!-- TRANSPORTE GRATUITO Y SUS OPCIONES -->
                     <div class="form-field form-transporte">
                         <label class="transporte-label">
                             <input type="checkbox" id="transporte" name="transporte" value="Sí">
                             <span class="transporte-box"></span>
                             <span class="transporte-texto">
-                                <strong>🚌 Quiero transporte <span class="texto-gratis">GRATIS</span> desde la Basílica de Higüey</strong>
+                                <strong>🚌 Quiero transporte <span class="texto-gratis">GRATIS</span></strong>
                                 <span class="transporte-detalle">
-                                    Sale a las <strong>6:00 AM</strong> desde la Basílica.<br>
                                     <strong>¡Cupos Limitados!</strong> (Sujeto a disponibilidad).
                                 </span>
                             </span>
                         </label>
+
+                        <!-- Opciones de salida ocultas por defecto -->
+                        <div id="opcionesTransporte" class="opciones-transporte hidden-section">
+                            <p class="opciones-transporte-title">Selecciona tu punto de salida *</p>
+                            
+                            <div class="radio-group-transporte">
+                                <label class="radio-option radio-transporte">
+                                    <input type="radio" name="punto_salida" value="6:00 am - Parqueo Basílica de Higüey">
+                                    <span class="radio-box">6:00 am - Parqueo Basílica de Higüey</span>
+                                </label>
+                                <label class="radio-option radio-transporte">
+                                    <input type="radio" name="punto_salida" value="4:50 am - Bomba Total Cruce de Coco Bongo (frente al Bravo de Bávaro)">
+                                    <span class="radio-box">4:50 am - Bomba Total Cruce de Coco Bongo (frente al Bravo de Bávaro)</span>
+                                </label>
+                                <label class="radio-option radio-transporte">
+                                    <input type="radio" name="punto_salida" value="5:20 am - Plaza del Ayuntamiento Verón">
+                                    <span class="radio-box">5:20 am - Plaza del Ayuntamiento Verón</span>
+                                </label>
+                                <label class="radio-option radio-transporte">
+                                    <input type="radio" name="punto_salida" value="5:50 am - La Otra Banda, Letrero de la Entrada">
+                                    <span class="radio-box">5:50 am - La Otra Banda, Letrero de la Entrada</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-section-title">Contacto de emergencia</div>

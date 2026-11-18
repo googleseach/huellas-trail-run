@@ -101,6 +101,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
+    // LÓGICA DE TRANSPORTE (MOSTRAR/OCULTAR OPCIONES)
+    // =========================================
+    const transporteCheckbox = document.getElementById('transporte');
+    const opcionesTransporte = document.getElementById('opcionesTransporte');
+    const radiosSalida = document.querySelectorAll('input[name="punto_salida"]');
+
+    if (transporteCheckbox) {
+        transporteCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                opcionesTransporte.classList.remove('hidden-section');
+                radiosSalida.forEach(r => r.required = true);
+            } else {
+                opcionesTransporte.classList.add('hidden-section');
+                radiosSalida.forEach(r => {
+                    r.required = false;
+                    r.checked = false; // Desmarcar si quita el transporte
+                });
+            }
+        });
+    }
+
+    // =========================================
     // VALIDACIÓN DE CÉDULA EN TIEMPO REAL
     // =========================================
     const inputCedula = document.getElementById('cedula');
@@ -357,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(form);
             const usaTransporte = formData.get('transporte') === 'Sí';
+            const puntoSalida = usaTransporte ? formData.get('punto_salida') : 'No aplica';
             
             datosInscripcion = {
                 nombre: formData.get('nombre'),
@@ -367,7 +390,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 distancia: formData.get('distancia'),
                 talla: formData.get('talla'),
                 club: clubSeleccionado,
-                transporte: usaTransporte ? 'Sí (Reservado desde la Basílica)' : 'No',
+                transporte: usaTransporte ? 'Sí' : 'No',
+                puntoSalida: puntoSalida,
                 emergenciaNombre: formData.get('emergencia-nombre'),
                 emergenciaTelefono: formData.get('emergencia-telefono'),
                 condiciones: formData.get('condiciones') || 'Ninguna'
@@ -411,8 +435,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (usaTransporte) {
                 resumenHTML += `
                     <div class="resumen-linea">
-                        <span class="resumen-concepto">Transporte desde la Basílica</span>
-                        <span class="resumen-monto"><span class="texto-gratis">¡GRATIS!</span> (Cupo Reservado)</span>
+                        <span class="resumen-concepto">Transporte (${datosInscripcion.puntoSalida})</span>
+                        <span class="resumen-monto"><span class="texto-gratis">¡GRATIS!</span></span>
                     </div>
                 `;
             }
@@ -428,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>Cédula:</strong> ${datosInscripcion.cedula}</p>
                     <p><strong>Talla de camiseta:</strong> ${datosInscripcion.talla}</p>
                     <p><strong>Club:</strong> ${datosInscripcion.club}</p>
-                    ${usaTransporte ? '<p><strong>🚌 Transporte:</strong> Sí — Sale 6:00 AM desde la Basílica de Higüey</p>' : ''}
+                    ${usaTransporte ? `<p><strong>🚌 Transporte:</strong> Sí — Salida: ${datosInscripcion.puntoSalida}</p>` : ''}
                 </div>
             `;
 
@@ -450,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnEnviarComprobante.addEventListener('click', (e) => {
             e.preventDefault();
 
-            const usaTransporte = datosInscripcion.transporte && datosInscripcion.transporte.includes('Sí');
+            const usaTransporte = datosInscripcion.transporte === 'Sí';
             const precioInscripcion = datosInscripcion.distancia === '10K' ? PRECIO_10K : PRECIO_5K;
             const total = precioInscripcion;
             
@@ -475,8 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mensaje += `
 
 🚌 *TRANSPORTE*
-• Servicio: Desde la Basílica de Higüey
-• Hora de salida: 6:00 AM
+• Punto de Salida: ${datosInscripcion.puntoSalida}
 • Costo: ¡GRATIS! (Cupo reservado)`;
             }
 
